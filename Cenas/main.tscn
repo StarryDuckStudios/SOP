@@ -13,6 +13,9 @@ size = Vector2(128, 128)
 script = ExtResource("1_l7ph0")
 
 [node name="Personagem" parent="." instance=ExtResource("1_1f2ru")]
+position = Vector2(-64, 0)
+
+[node name="Personagem2" parent="." instance=ExtResource("1_1f2ru")]
 position = Vector2(-104, 16)
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var curr_pos = [0,0]
+var curr_pos = [32,32]
 var velo = 16
 var continue_ = true
 var movimentos = []
@@ -10,10 +10,11 @@ var r = true
 var l = true
 
 @export var pos = 1
-@onready var animator = $CalebAnimation
+var animator
 func _ready():
-	$Sprite2D.texture = load("res://sprites/Caleb.png")
-	position = Vector2(0,0)
+	animator = $MorganaAnimator
+	$Sprite2D.texture = load("res://sprites/Morgana_SpriteSheet.png")
+	position = Vector2(32,32)
 func _input(event):	
 	if continue_ == true and pos == 1:
 		if Input.is_action_pressed("ui_right") and r:
@@ -64,9 +65,11 @@ func R_obstacle(area):
 func R_free(area):
 	r = true
 	print("rf")
-func L_obstacle(area):
-	l = false
-	print("l")
 func L_free(area):
 	l = true
 	print("lf")
+	
+func L_obstacle(area):
+	l = false
+	print("l")
+
