@@ -73,28 +73,19 @@ func animation(direction):
 		
 func U_obstacle(area):
 	u = false
-	print("u")
 func U_free(area):
 	u = true
-	print("uf")
 func D_obstacle(area):
 	d = false
-	print("d")
 func D_free(area):
 	d = true
-	print("df")
 func R_obstacle(area):
 	r = false
-	print("r")
 func R_free(area):
 	r = true
-	print("rf")
 func L_free(area):
 	l = true
-	print("lf")
 func L_obstacle(area):
 	l = false
-	print("l")
-
 func change_character():
 	$Sprite2D.texture = load(textura)

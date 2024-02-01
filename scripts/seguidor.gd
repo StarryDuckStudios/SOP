@@ -2,6 +2,7 @@ extends CharacterBody2D
 @export var animator: AnimationPlayer
 @export var party_pos = 2
 @export var name_ = ""
+@export var ativo = true
 var textura = "res://sprites/Morgana_SpriteSheet.png"
 func _ready():
 	$Sprite2D.texture = load(textura)

@@ -1,5 +1,9 @@
 extends Node2D
 signal change_character
+var seguidores_ = ["Seguidor","Seguidor2","Seguidor3" ]
+func _ready():
+	party_ativo()
+	
 func _input(event):
 	if Input.is_action_just_pressed("1"):
 		if $Personagem.name_ != "caleb":
@@ -28,9 +32,15 @@ func change_(seguidor):
 	emit_signal("change_character")
 	
 func change_2(tag):
-	if $Seguidor.name_ == tag:
-		change_($Seguidor)
-	elif $Seguidor2.name_ == tag:
-		change_($Seguidor2)
-	elif $Seguidor3.name_ == tag:
-		change_($Seguidor3)
+	#verifica o nome do personagem e se ele está ativo
+	for seg in seguidores_:
+		if $".".get_node(seg).name_ == tag and $".".get_node(seg).ativo:
+			change_($".".get_node(seg))
+func party_ativo():
+	#desativa os membros com o .ativo == false, e reposiciona os demais
+	for seg in seguidores_:
+		if $".".get_node(seg).ativo != true:
+			$".".get_node(seg).hide()
+			for seg_ in seguidores_:
+				if $".".get_node(seg_).ativo:
+					$".".get_node(seg_).party_pos -=1

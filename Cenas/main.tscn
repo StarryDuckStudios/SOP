@@ -18,6 +18,7 @@ position = Vector2(-64, 0)
 
 [node name="Seguidor" parent="." instance=ExtResource("3_rfqnh")]
 name_ = "morgana"
+ativo = false
 
 [node name="Seguidor2" parent="." instance=ExtResource("3_rfqnh")]
 party_pos = 3
