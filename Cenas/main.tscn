@@ -1,13 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgmpc66dobfed"]
+[gd_scene load_steps=7 format=3 uid="uid://cgmpc66dobfed"]
 
 [ext_resource type="PackedScene" uid="uid://3h28lxb02vva" path="res://Cenas/caleb.tscn" id="1_1f2ru"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_l7ph0"]
 [ext_resource type="Texture2D" uid="uid://dflv0nuq4o3bx" path="res://icon.svg" id="3_afkwq"]
+[ext_resource type="PackedScene" uid="uid://diqel02yd22ke" path="res://Cenas/seguidor.tscn" id="3_rfqnh"]
 
 [sub_resource type="TileSet" id="TileSet_f8u1w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7kkbn"]
-size = Vector2(128, 128)
+size = Vector2(128, 256)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_l7ph0")
@@ -15,8 +16,16 @@ script = ExtResource("1_l7ph0")
 [node name="Personagem" parent="." instance=ExtResource("1_1f2ru")]
 position = Vector2(-64, 0)
 
-[node name="Personagem2" parent="." instance=ExtResource("1_1f2ru")]
-position = Vector2(-104, 16)
+[node name="Seguidor" parent="." instance=ExtResource("3_rfqnh")]
+name_ = "morgana"
+
+[node name="Seguidor2" parent="." instance=ExtResource("3_rfqnh")]
+party_pos = 3
+name_ = "teste"
+
+[node name="Seguidor3" parent="." instance=ExtResource("3_rfqnh")]
+party_pos = 4
+name_ = "teste2"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
@@ -30,12 +39,6 @@ position = Vector2(-8, 8)
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("3_afkwq")
 
-[node name="Area2D" type="Area2D" parent="Icon"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/Area2D"]
-position = Vector2(-1.52588e-05, 0)
-shape = SubResource("RectangleShape2D_7kkbn")
-
 [node name="Icon2" type="Sprite2D" parent="."]
 position = Vector2(-8, 24)
 scale = Vector2(0.125, 0.125)
@@ -44,4 +47,13 @@ texture = ExtResource("3_afkwq")
 [node name="Area2D" type="Area2D" parent="Icon2"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon2/Area2D"]
+position = Vector2(0, -64)
 shape = SubResource("RectangleShape2D_7kkbn")
+
+[connection signal="change_character" from="." to="Personagem" method="change_character"]
+[connection signal="change_character" from="." to="Seguidor" method="change_character"]
+[connection signal="change_character" from="." to="Seguidor2" method="change_character"]
+[connection signal="change_character" from="." to="Seguidor3" method="change_character"]
+[connection signal="seguir" from="Personagem" to="Seguidor" method="seguir"]
+[connection signal="seguir" from="Personagem" to="Seguidor2" method="seguir"]
+[connection signal="seguir" from="Personagem" to="Seguidor3" method="seguir"]
