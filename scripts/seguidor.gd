@@ -7,7 +7,7 @@ var textura = "res://sprites/Morgana_SpriteSheet.png"
 func _ready():
 	$Sprite2D.texture = load(textura)
 func seguir():
-	if $"../Personagem".move_historic.size() > 3:
+	if $"../Personagem".move_historic.size() >= party_pos:
 		var tween = create_tween()
 		animator.play("walk_" + $"../Personagem".move_historic[$"../Personagem".move_historic.size() - party_pos ])
 		print($"../Personagem".move_historic)

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var curr_pos = [32,32]
+var curr_pos = [0,0]
 var velo = 16
 var continue_ = true
 var movimentos = []
@@ -19,35 +19,27 @@ func _ready():
 	animator = $CalebAnimation
 	name_ = "caleb"
 	$Sprite2D.texture = load(textura)
-	position = Vector2(32,32)
+	position = Vector2(0,0)
 func _input(event):
 	if continue_ == true:
 		if Input.is_action_pressed("ui_right"):
 			if r:
-				curr_pos[0] += velo
-				animation("r")
-				tween()
+				action(0, 1, "r")
 			else:
 				animator.play("idle_r")
 		elif Input.is_action_pressed("ui_left"):
 			if l:
-				curr_pos[0] -= velo
-				animation("l")
-				tween()
+				action(0, -1, "l")
 			else:
 				animator.play("idle_l")
 		elif Input.is_action_pressed("ui_down"):
 			if d:
-				curr_pos[1] += velo
-				animation("d")
-				tween()
+				action(1, 1, "d")
 			else:
 				animator.play("idle_d")
 		elif Input.is_action_pressed("ui_up"):
 			if u:
-				curr_pos[1] -= velo
-				animation("u")
-				tween()
+				action(1, -1, "u")
 			else:
 				animator.play("idle_u")
 func tween():
@@ -70,6 +62,11 @@ func animation(direction):
 		move_historic.pop_front()
 	await animator.animation_finished
 	animator.play("idle_" + direction)
+	
+func action(posicao,sentido, direction):
+	curr_pos[posicao] += velo * sentido
+	animation(direction)
+	tween()
 		
 func U_obstacle(area):
 	u = false

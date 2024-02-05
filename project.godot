@@ -11,11 +11,14 @@ config_version=5
 [application]
 
 config/name="Shadows Of Pactum Remake"
+run/main_scene="res://Cenas/main.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 
 [input]
