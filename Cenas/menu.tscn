@@ -1,0 +1,95 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6gw6ltmrw7rf"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_pftyu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_injrq"]
+bg_color = Color(0.6, 0.6, 0.6, 0.247059)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pftyu")
+
+[node name="Modificar_Menu" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 115.0
+offset_top = 348.0
+offset_right = 1027.0
+offset_bottom = 623.0
+
+[node name="Caleb" type="Panel" parent="Modificar_Menu"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+
+[node name="Morgana" type="Panel" parent="Modificar_Menu"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+
+[node name="Panel3" type="Panel" parent="Modificar_Menu"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+
+[node name="Dotty" type="Panel" parent="Modificar_Menu"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+
+[node name="Layout_Maior" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_injrq")
+
+[node name="Equipar_Panel" type="Panel" parent="Layout_Maior"]
+visible = false
+layout_mode = 0
+offset_left = 50.0
+offset_top = 80.0
+offset_right = 1052.0
+offset_bottom = 578.0
+
+[node name="Menu_1" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 40.0
+offset_right = 1147.0
+offset_bottom = 80.0
+alignment = 1
+
+[node name="Equipar" type="RichTextLabel" parent="Menu_1"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "Equipar"
+scroll_active = false
+
+[node name="Habilidades" type="RichTextLabel" parent="Menu_1"]
+custom_minimum_size = Vector2(250, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "Habilidades"
+scroll_active = false
+
+[node name="Mochila" type="RichTextLabel" parent="Menu_1"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "Mochila"
+scroll_active = false
+
+[node name="Opcoes" type="RichTextLabel" parent="Menu_1"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "Opções"
+scroll_active = false

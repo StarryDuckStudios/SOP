@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgmpc66dobfed"]
+[gd_scene load_steps=8 format=3 uid="uid://cgmpc66dobfed"]
 
 [ext_resource type="PackedScene" uid="uid://3h28lxb02vva" path="res://Cenas/caleb.tscn" id="1_1f2ru"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_l7ph0"]
 [ext_resource type="Texture2D" uid="uid://dk8qbksh5lr5t" path="res://icon.svg" id="3_afkwq"]
 [ext_resource type="PackedScene" uid="uid://diqel02yd22ke" path="res://Cenas/seguidor.tscn" id="3_rfqnh"]
+[ext_resource type="PackedScene" uid="uid://b6gw6ltmrw7rf" path="res://Cenas/menu.tscn" id="5_uhm7t"]
 
 [sub_resource type="TileSet" id="TileSet_f8u1w"]
 
@@ -23,7 +24,6 @@ name_ = "morgana"
 position = Vector2(0, 16)
 party_pos = 3
 name_ = "teste"
-ativo = false
 
 [node name="Seguidor3" parent="." instance=ExtResource("3_rfqnh")]
 position = Vector2(16, 0)
@@ -31,7 +31,15 @@ party_pos = 4
 name_ = "teste2"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+position = Vector2(16, 0)
+zoom = Vector2(4.05, 4.05)
+
+[node name="Menu" parent="Camera2D" instance=ExtResource("5_uhm7t")]
+offset_left = -144.0
+offset_top = -80.0
+offset_right = 1008.0
+offset_bottom = 568.0
+scale = Vector2(0.25, 0.25)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_f8u1w")
