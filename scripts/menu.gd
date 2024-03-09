@@ -1,7 +1,7 @@
 extends Control
 var menu = -1
 var control = 0
-var control_save = 0
+var control_save = []
 var caminho = "Menu_1"
 var caminho_array = ["Menu_1"]
 var positivo
@@ -24,21 +24,22 @@ func _input(event):
 				navegar(-1)
 				menus_options()
 		if Input.is_action_just_pressed("z"):
-			await get_tree().create_timer(0.1).timeout 
 			modificar_action()
 		if Input.is_action_just_pressed("x"):
-			get_node(caminho).get_child(control).modulate = "White"
 			if caminho_array.size() > 1:
-				control = control_save #Usa o backup do control para voltar a posição anterior
+				get_node(caminho).get_child(control).modulate = "White"
+				control = control_save[control_save.size() - 1] #Usa o backup do control para voltar a posição anterior
+				control_save.pop_back()
+				print(control_save)
 				caminho_array.pop_back()
 				caminho = caminho_array[caminho_array.size() -1]
 				verifica()
 			else:
-				control = 0 #Zera o control pois estamos saindo do menu
 				menu *= -1
 	else:
 		$".".hide()
 		get_node(caminho).get_child(control).modulate = "White"
+		control = 0 #Zera o control pois estamos saindo do menu
 		verifica()
 func verifica():
 	get_node(caminho).get_child(control).modulate = "Red"
@@ -50,23 +51,22 @@ func verifica():
 		negativo = "ui_up"
 		
 func navegar(valor):
-	control += valor
-	get_node(caminho).get_child(control).modulate = "Red"
-	get_node(caminho).get_child(control - valor).modulate = "White"
+	if get_node(caminho).get_child_count() > 1:
+		control += valor
+		get_node(caminho).get_child(control).modulate = "Red"
+		get_node(caminho).get_child(control - valor).modulate = "White"
 	
 #Menu Options
 func equipar():
-	if get_node(caminho).get_child(control).name == "Equipar":
-		$Layout_Maior/Equipar_Panel.hide()
-	else:
-		$Layout_Maior/Equipar_Panel.hide()
-		
+	print()
 func modificar_action():
-	control_save = control #Armazena o control para depois voltar ao mesmo lugar que estava
 	if get_node(caminho).get_child(control).name == "Equipar" or get_node(caminho).get_child(control).name == "Habilidades":
-		caminho = "Modificar_Menu"
-		caminho_array.append(caminho)
-		verifica()
-		
+		muda("Modificar_Menu")
+func muda(func_caminho):
+	control_save.append(control)#Armazena o control para depois voltar ao mesmo lugar que estava
+	caminho = func_caminho
+	caminho_array.append(caminho)
+	control = 0
+	verifica()
 func menus_options():
 	equipar()
