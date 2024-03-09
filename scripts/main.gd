@@ -3,7 +3,9 @@ signal change_character
 var seguidores_ = ["Seguidor","Seguidor2","Seguidor3" ]
 func _ready():
 	party_ativo()
-	
+	print($Seguidor.party_pos)
+	print($Seguidor2.party_pos)
+	print($Seguidor3.party_pos)
 func _input(event):
 	if Input.is_action_just_pressed("1"):
 		if $Personagem.name_ != "caleb":
@@ -42,5 +44,5 @@ func party_ativo():
 		if $".".get_node(seg).ativo != true:
 			$".".get_node(seg).hide()
 			for seg_ in seguidores_:
-				if $".".get_node(seg_).ativo:
+				if $".".get_node(seg_).ativo and $".".get_node(seg_).party_pos >= $".".get_node(seg).party_pos:
 					$".".get_node(seg_).party_pos -=1
