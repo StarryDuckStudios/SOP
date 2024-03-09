@@ -18,16 +18,19 @@ position = Vector2(16, 16)
 
 [node name="Seguidor" parent="." instance=ExtResource("3_rfqnh")]
 name_ = "morgana"
+ativo = false
 
 [node name="Seguidor2" parent="." instance=ExtResource("3_rfqnh")]
 position = Vector2(0, 16)
 party_pos = 3
 name_ = "teste"
+ativo = false
 
 [node name="Seguidor3" parent="." instance=ExtResource("3_rfqnh")]
 position = Vector2(16, 0)
 party_pos = 4
 name_ = "teste2"
+ativo = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
