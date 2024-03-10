@@ -62,6 +62,11 @@ func equipar():
 func modificar_action():
 	if get_node(caminho).get_child(control).name == "Equipar" or get_node(caminho).get_child(control).name == "Habilidades":
 		muda("Modificar_Menu")
+	if get_node(caminho).get_child(control).name == "Morgana":
+		muda("Modificar_Menu/Morgana")
+		var tween = create_tween()
+		tween.tween_property($Modificar_Menu/Morgana, "position", Vector2(0, 0), 0.5)
+		
 func muda(func_caminho):
 	control_save.append(control)#Armazena o control para depois voltar ao mesmo lugar que estava
 	caminho = func_caminho
