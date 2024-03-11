@@ -6,7 +6,16 @@ var caminho = "Menu_1"
 var caminho_array = ["Menu_1"]
 var positivo
 var negativo
+var permite = false
+var voltar_ativado = true
+var dicionario = {
+	"/root/Menu/Modificar_Menu/Caleb" : card_volta,
+	"/root/Menu/Modificar_Menu/Morgana" : card_volta,
+	"/root/Menu/Modificar_Menu/Darcy" : card_volta,
+	"/root/Menu/Modificar_Menu/Dotty" : card_volta,
+}
 func _ready():
+	print(str($Modificar_Menu/Morgana.get_path()))
 	$".".hide()
 	verifica()
 func _input(event):
@@ -24,16 +33,13 @@ func _input(event):
 				navegar(-1)
 				menus_options()
 		if Input.is_action_just_pressed("z"):
+			await get_tree().create_timer(0.1).timeout 
 			modificar_action()
-		if Input.is_action_just_pressed("x"):
+		if Input.is_action_just_pressed("x") and voltar_ativado:
 			if caminho_array.size() > 1:
-				get_node(caminho).get_child(control).modulate = "White"
-				control = control_save[control_save.size() - 1] #Usa o backup do control para voltar a posição anterior
-				control_save.pop_back()
-				print(control_save)
-				caminho_array.pop_back()
-				caminho = caminho_array[caminho_array.size() -1]
-				verifica()
+				permite = true
+				verifica_volta()
+				voltar()
 			else:
 				menu *= -1
 	else:
@@ -60,13 +66,16 @@ func navegar(valor):
 func equipar():
 	print()
 func modificar_action():
+	if get_node(caminho) == get_node("Modificar_Menu") and permite:
+		for child in get_node("Modificar_Menu").get_children():
+			if get_node(caminho).get_child(control).name == child.name:
+				muda(str(child.get_path()))
+				card_tween(str(child.get_path()), child.name)
+		permite = false
 	if get_node(caminho).get_child(control).name == "Equipar" or get_node(caminho).get_child(control).name == "Habilidades":
 		muda("Modificar_Menu")
-	if get_node(caminho).get_child(control).name == "Morgana":
-		muda("Modificar_Menu/Morgana")
-		var tween = create_tween()
-		tween.tween_property($Modificar_Menu/Morgana, "position", Vector2(0, 0), 0.5)
-		
+		permite = true
+
 func muda(func_caminho):
 	control_save.append(control)#Armazena o control para depois voltar ao mesmo lugar que estava
 	caminho = func_caminho
@@ -75,3 +84,28 @@ func muda(func_caminho):
 	verifica()
 func menus_options():
 	equipar()
+func verifica_volta():
+	for caminhos_ in dicionario.keys():
+		if caminhos_ == caminho:
+			dicionario[caminhos_].call("Morgana")
+func voltar():
+	get_node(caminho).get_child(control).modulate = "White"
+	control = control_save[control_save.size() - 1] #Usa o backup do control para voltar a posição anterior
+	control_save.pop_back()
+	print(control_save)
+	caminho_array.pop_back()
+	caminho = caminho_array[caminho_array.size() -1]
+	verifica()
+func card_tween(caminho_, card):
+	var tween = create_tween()
+	voltar_ativado = false
+	tween.tween_property(get_node(caminho_), "position", Vector2(0, 0), 0.5)
+	tween.connect("finished", func voltar(): voltar_ativado = true)
+	await get_tree().create_timer(0).timeout 
+	for child in get_node("Modificar_Menu").get_children():
+		if child.name != card:
+			child.hide()
+func card_volta(card):
+	for child in get_node("Modificar_Menu").get_children():
+		child.show()
+	

@@ -14,6 +14,29 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pftyu")
 
+[node name="CalebContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 229.0
+offset_right = 350.0
+offset_bottom = 269.0
+
+[node name="Label" type="Label" parent="CalebContainer"]
+layout_mode = 2
+text = "aaaaa"
+
+[node name="Label2" type="Label" parent="CalebContainer"]
+layout_mode = 2
+text = "aaaaa"
+
+[node name="Label3" type="Label" parent="CalebContainer"]
+layout_mode = 2
+text = "aaaaa"
+
+[node name="Label4" type="Label" parent="CalebContainer"]
+layout_mode = 2
+text = "aaaaa"
+
 [node name="Modificar_Menu" type="HBoxContainer" parent="."]
 layout_mode = 2
 offset_left = 115.0
@@ -25,17 +48,35 @@ offset_bottom = 623.0
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 
+[node name="child" type="Label" parent="Modificar_Menu/Caleb"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="Morgana" type="Panel" parent="Modificar_Menu"]
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 
-[node name="Panel3" type="Panel" parent="Modificar_Menu"]
+[node name="child" type="Label" parent="Modificar_Menu/Morgana"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Darcy" type="Panel" parent="Modificar_Menu"]
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
+
+[node name="child" type="Label" parent="Modificar_Menu/Darcy"]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="Dotty" type="Panel" parent="Modificar_Menu"]
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
+
+[node name="child" type="Label" parent="Modificar_Menu/Dotty"]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="Layout_Maior" type="Panel" parent="."]
 layout_mode = 1
