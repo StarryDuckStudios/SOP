@@ -87,7 +87,7 @@ func menus_options():
 func verifica_volta():
 	for caminhos_ in dicionario.keys():
 		if caminhos_ == caminho:
-			dicionario[caminhos_].call("Morgana")
+			dicionario[caminhos_].call()
 func voltar():
 	get_node(caminho).get_child(control).modulate = "White"
 	control = control_save[control_save.size() - 1] #Usa o backup do control para voltar a posição anterior
@@ -97,15 +97,19 @@ func voltar():
 	caminho = caminho_array[caminho_array.size() -1]
 	verifica()
 func card_tween(caminho_, card):
+	for child in get_node("Modificar_Menu").get_children():
+		if child.name != card:
+			child.hide()
+		await get_tree().create_timer(0.1).timeout
 	var tween = create_tween()
 	voltar_ativado = false
 	tween.tween_property(get_node(caminho_), "position", Vector2(0, 0), 0.5)
 	tween.connect("finished", func voltar(): voltar_ativado = true)
 	await get_tree().create_timer(0).timeout 
-	for child in get_node("Modificar_Menu").get_children():
-		if child.name != card:
-			child.hide()
-func card_volta(card):
+func card_volta():
 	for child in get_node("Modificar_Menu").get_children():
 		child.show()
+		await get_tree().create_timer(0.1).timeout
+		
+
 	

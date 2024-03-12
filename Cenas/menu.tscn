@@ -67,6 +67,7 @@ custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 
 [node name="child" type="Label" parent="Modificar_Menu/Darcy"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
@@ -75,6 +76,7 @@ custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 
 [node name="child" type="Label" parent="Modificar_Menu/Dotty"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
