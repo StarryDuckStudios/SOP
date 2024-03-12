@@ -9,13 +9,13 @@ var negativo
 var permite = false
 var voltar_ativado = true
 var dicionario = {
-	"/root/Menu/Modificar_Menu/Caleb" : card_volta,
-	"/root/Menu/Modificar_Menu/Morgana" : card_volta,
-	"/root/Menu/Modificar_Menu/Darcy" : card_volta,
-	"/root/Menu/Modificar_Menu/Dotty" : card_volta,
 }
 func _ready():
-	print(str($Modificar_Menu/Morgana.get_path()))
+	print(str(get_tree().get_current_scene().get_path()))
+	#Monta o dicionário conforme a cena
+	for child in get_node("Modificar_Menu").get_children():
+		dicionario[str(child.get_path())] = card_volta
+	print(dicionario)
 	$".".hide()
 	verifica()
 func _input(event):
@@ -95,16 +95,19 @@ func voltar():
 	print(control_save)
 	caminho_array.pop_back()
 	caminho = caminho_array[caminho_array.size() -1]
+	print(caminho_array)
 	verifica()
 func card_tween(caminho_, card):
+	voltar_ativado = false
 	for child in get_node("Modificar_Menu").get_children():
 		if child.name != card:
 			child.hide()
-		await get_tree().create_timer(0.1).timeout
+			await get_tree().create_timer(0.1).timeout
 	var tween = create_tween()
-	voltar_ativado = false
 	tween.tween_property(get_node(caminho_), "position", Vector2(0, 0), 0.5)
-	tween.connect("finished", func voltar(): voltar_ativado = true)
+	print(caminho_array)
+	tween.connect("finished", func voltar_ativo(): voltar_ativado = true)
+	print(caminho_array)
 	await get_tree().create_timer(0).timeout 
 func card_volta():
 	for child in get_node("Modificar_Menu").get_children():
