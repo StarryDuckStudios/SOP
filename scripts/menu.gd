@@ -22,6 +22,7 @@ func _input(event):
 	if Input.is_action_just_pressed("x") and menu == -1:
 		await get_tree().create_timer(0.1).timeout 
 		menu *= -1
+		get_tree().paused = true
 	if menu == 1:
 		$".".show()
 		if Input.is_action_just_pressed(positivo):
@@ -42,6 +43,7 @@ func _input(event):
 				voltar()
 			else:
 				menu *= -1
+				get_tree().paused = false
 	else:
 		$".".hide()
 		get_node(caminho).get_child(control).modulate = "White"
