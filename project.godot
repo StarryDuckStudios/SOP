@@ -15,6 +15,11 @@ run/main_scene="res://Cenas/main.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ConfigsGlobais="*res://scripts/configs_globais.gd"
+ChatsLog="*res://scripts/chats_log.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"
@@ -54,5 +59,6 @@ z={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

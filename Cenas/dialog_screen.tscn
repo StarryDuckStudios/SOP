@@ -1,0 +1,153 @@
+[gd_scene load_steps=4 format=3 uid="uid://df4or3k6hg25d"]
+
+[ext_resource type="Script" path="res://scripts/dialog_screen.gd" id="1_m56le"]
+[ext_resource type="Texture2D" uid="uid://b3p4wu1sai88x" path="res://sprites/Caleb/Expressions/Caleb_Expression_3.png" id="2_joktb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbrhn"]
+bg_color = Color(0.6, 0.6, 0.6, 0.290196)
+
+[node name="DialogScreen" type="Control" node_paths=PackedStringArray("_name", "_dialog", "_faceset")]
+custom_minimum_size = Vector2(700, 150)
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = -160.0
+offset_right = 350.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_m56le")
+_name = NodePath("BackGround/Hcontainer/VContainer/Name")
+_dialog = NodePath("BackGround/Hcontainer/VContainer/RichTextLabel")
+_faceset = NodePath("BackGround/Hcontainer/Border/FaceSet")
+
+[node name="BackGround" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="Hcontainer" type="HBoxContainer" parent="BackGround"]
+custom_minimum_size = Vector2(686, 130)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.5
+offset_top = -54.5
+offset_right = 245.5
+offset_bottom = 54.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Border" type="ColorRect" parent="BackGround/Hcontainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="FaceSet" type="TextureRect" parent="BackGround/Hcontainer/Border"]
+custom_minimum_size = Vector2(115, 104)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.5
+offset_top = -67.5
+offset_right = 65.5
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_joktb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VContainer" type="VBoxContainer" parent="BackGround/Hcontainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="BackGround/Hcontainer/VContainer"]
+layout_mode = 2
+text = "Calebo"
+horizontal_alignment = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BackGround/Hcontainer/VContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+scroll_following = true
+
+[node name="Responder_Container" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 700.0
+offset_bottom = 150.0
+color = Color(0, 0, 0, 0.6)
+
+[node name="VContainer" type="VBoxContainer" parent="Responder_Container"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 5.0
+offset_right = 697.0
+offset_bottom = 145.0
+
+[node name="Opcao_1" type="RichTextLabel" parent="Responder_Container/VContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = " Você é meio estranho?
+"
+scroll_active = false
+
+[node name="Panel" type="Panel" parent="Responder_Container/VContainer/Opcao_1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cbrhn")
+
+[node name="Opcao_2" type="RichTextLabel" parent="Responder_Container/VContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = " Você é meio estranho?
+"
+scroll_active = false
+
+[node name="Panel" type="Panel" parent="Responder_Container/VContainer/Opcao_2"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cbrhn")
+
+[node name="Opcao_3" type="RichTextLabel" parent="Responder_Container/VContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = " Você é meio estranho?
+"
+scroll_active = false
+
+[node name="Panel" type="Panel" parent="Responder_Container/VContainer/Opcao_3"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cbrhn")
