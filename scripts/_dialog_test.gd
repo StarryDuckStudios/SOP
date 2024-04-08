@@ -54,6 +54,57 @@ var _dialog_data: Dictionary = {
 		"title" : "Calebo",
 		"type" : "fala"
 	},
+	3: {
+		"faceset": "res://sprites/Caleb/Expressions/Caleb_Expression_3.png",
+		"dialog_0" : {
+			"pt": "Olá, tudo bem?",
+			"En": "So, is it, by"
+		},
+		"dialog_1" : {
+			"pt": "Olá, tudo bem?",
+			"En": "I hate you too"
+		},
+		"dialog_2" : {
+			"pt": "Olá, tudo bem?",
+			"En": "Weirdo"
+		},
+		"title" : "Calebo",
+		"type" : "fala"
+	},
+	4: {
+		"faceset": "res://sprites/Caleb/Expressions/Caleb_Expression_3.png",
+		"dialog_0" : {
+			"pt": "Olá, tudo bem?",
+			"En": "So, is it, by"
+		},
+		"dialog_1" : {
+			"pt": "Olá, tudo bem?",
+			"En": "I hate you too"
+		},
+		"dialog_2" : {
+			"pt": "Olá, tudo bem?",
+			"En": "Weirdo"
+		},
+		"title" : "Calebo",
+		"type" : "fala"
+	},
+	5: {
+		"faceset": "res://sprites/Caleb/Expressions/Caleb_Expression_3.png",
+		"dialog_0" : {
+			"pt": "Olá, tudo bem?",
+			"En": "So, is it, by"
+		},
+		"dialog_1" : {
+			"pt": "Olá, tudo bem?",
+			"En": "I hate you too"
+		},
+		"dialog_2" : {
+			"pt": "Olá, tudo bem?",
+			"En": "Weirdo"
+		},
+		"title" : "Calebo",
+		"type" : "fala"
+	},
 	100: {
 		"faceset": "res://sprites/Caleb/Expressions/Caleb_Expression_3.png",
 		"dialog_0" : {

@@ -540,6 +540,7 @@ _data = {
 b = Vector2(0, 8)
 
 [node name="Personagem" type="CharacterBody2D" node_paths=PackedStringArray("animator")]
+y_sort_enabled = true
 script = ExtResource("1_j1ocp")
 animator = NodePath("CalebAnimation")
 

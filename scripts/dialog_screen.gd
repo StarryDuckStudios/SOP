@@ -16,6 +16,7 @@ var data: Dictionary = {
 
 func _ready():
 	get_node("Responder_Container").hide()
+	get_node("ScrollContainer").hide()
 	get_tree().paused = true
 	configs._menu = false
 	_initialize_dialog()
@@ -48,6 +49,7 @@ func _initialize_dialog():
 			_name.text = data[_id]["title"]
 			_dialog.text = data[_id][dialog][configs.language]
 			_faceset.texture = load(data[_id]["faceset"])
+			duplica_card()
 		elif data[_id]["type"] == "resposta":
 			get_node("Responder_Container").show()
 			get_node("BackGround").hide()
@@ -64,6 +66,13 @@ func _initialize_dialog():
 
 #Parte de interação
 func _input(event):
+	if Input.is_action_just_pressed("x") and _dialog.visible_ratio == 1 and data[_id]["type"] == "fala":
+		if get_node("ScrollContainer").is_visible_in_tree() == false:
+			get_node("ScrollContainer").show()
+			get_node("BackGround").hide()
+		else:
+			get_node("ScrollContainer").hide()
+			get_node("BackGround").show()
 	if data[_id]["type"] == "resposta":
 		if Input.is_action_just_pressed("ui_down"):
 			if control < get_node("Responder_Container/VContainer").get_child_count(control) - 1:
@@ -78,8 +87,16 @@ func _input(event):
 					dialog = "dialog_" + str(control)
 					control = 0
 					_initialize_dialog()
-		
 func navegar(valor):
 	control += valor
 	get_node("Responder_Container/VContainer").get_child(control).get_child(0).show()
 	get_node("Responder_Container/VContainer").get_child(control - valor).get_child(0).hide()
+func duplica_card():
+	var card = get_node("BackGround")
+	var new_child = card.duplicate()
+	new_child.show()
+	get_node("ScrollContainer/ChatLog").add_child(new_child)
+	print(new_child.get_child(0).get_child(1).get_child(1).text)
+	#new_child.position = Vector2(0, _id * 155);
+	new_child.custom_minimum_size.y = 150
+	new_child.get_child(0).get_child(1).get_child(1).text = data[_id][dialog][configs.language];
