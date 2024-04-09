@@ -1,3 +1,3 @@
 extends Node
 var language = "En"
-var _menu = true
+var _menu = true #permite abrir o menu

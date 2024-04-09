@@ -40,7 +40,7 @@ var _dialog_data: Dictionary = {
 	2: {
 		"faceset": "res://sprites/Caleb/Expressions/Caleb_Expression_3.png",
 		"dialog_0" : {
-			"pt": "Olá, tudo bem?",
+			"pt": "Olá, tudo bem? 1",
 			"En": "So, is it, by"
 		},
 		"dialog_1" : {
@@ -57,7 +57,7 @@ var _dialog_data: Dictionary = {
 	3: {
 		"faceset": "res://sprites/Caleb/Expressions/Caleb_Expression_3.png",
 		"dialog_0" : {
-			"pt": "Olá, tudo bem?",
+			"pt": "Olá, tudo bem 2?",
 			"En": "So, is it, by"
 		},
 		"dialog_1" : {
@@ -74,7 +74,7 @@ var _dialog_data: Dictionary = {
 	4: {
 		"faceset": "res://sprites/Caleb/Expressions/Caleb_Expression_3.png",
 		"dialog_0" : {
-			"pt": "Olá, tudo bem?",
+			"pt": "Olá, tudo bem? 3",
 			"En": "So, is it, by"
 		},
 		"dialog_1" : {
@@ -91,7 +91,7 @@ var _dialog_data: Dictionary = {
 	5: {
 		"faceset": "res://sprites/Caleb/Expressions/Caleb_Expression_3.png",
 		"dialog_0" : {
-			"pt": "Olá, tudo bem?",
+			"pt": "Olá, tudo bem? 4",
 			"En": "So, is it, by"
 		},
 		"dialog_1" : {
@@ -104,8 +104,10 @@ var _dialog_data: Dictionary = {
 		},
 		"title" : "Calebo",
 		"type" : "fala"
-	},
-	100: {
+	}
+}
+var _dialog_data_again: Dictionary = {
+	0: {
 		"faceset": "res://sprites/Caleb/Expressions/Caleb_Expression_3.png",
 		"dialog_0" : {
 			"pt": "Você denovo?",
@@ -113,7 +115,17 @@ var _dialog_data: Dictionary = {
 			},
 		"title" : "Calebo",
 		"type" : "fala"
+	},
+	1: {
+		"faceset": "res://sprites/Caleb/Expressions/Caleb_Expression_3.png",
+		"dialog_0" : {
+			"pt": "Você denovo?",
+			"En": "Fuck you",
+			},
+		"title" : "Calebo",
+		"type" : "fala"
 	}
+
 }
 
 @export_category("Objects")
@@ -125,7 +137,10 @@ func _input(event):
 		animator.play(traduz_pos[anim_name.name]) #Faz o player virar para o npc
 		
 		var _new_dialog: DialogScreen = _DIALOG_SCREEN.instantiate()
-		_new_dialog.data = _dialog_data
+		if ChatsLog.npc_teste.primeira_vez == true:
+			_new_dialog.data = _dialog_data
+		else:
+			_new_dialog.data = _dialog_data_again
 		await animator.animation_finished
 		_hud.add_child(_new_dialog)
 	
