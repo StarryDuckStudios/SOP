@@ -2,7 +2,8 @@ extends Control
 class_name DialogScreen
 var control = 0
 var chatlog_on = false
-var primeira_vez = ChatsLog.npc_teste.primeira_vez
+var npc_alvo = ChatsLog.chat_ativo; #Uma varíável global atribui a chave do chat ativo para ser usada dinamicamente
+var primeira_vez = ChatsLog[npc_alvo].primeira_vez;
 var dialog = "dialog_0"
 var _step: float = 0.05 #Velocidade do texto
 
@@ -21,7 +22,7 @@ func _ready():
 	get_tree().paused = true
 	configs._menu = false
 	if primeira_vez == false:
-		for cards in ChatsLog.npc_teste.chat_log.values():
+		for cards in ChatsLog[npc_alvo].chat_log.values():
 			var card_duplicate = cards.duplicate()
 			get_node("ScrollContainer/ChatLog").add_child(card_duplicate)
 	_initialize_dialog()
@@ -35,7 +36,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("z") and data[_id]["type"] == "fala" and chatlog_on == false:
 		_id += 1
 		if _id == data.size():
-			ChatsLog.npc_teste.primeira_vez = false
+			ChatsLog[npc_alvo].primeira_vez = false
 			configs._menu = true
 			get_tree().paused = false
 			queue_free()
@@ -103,17 +104,17 @@ func duplica_card(texto):
 	get_node("ScrollContainer/ChatLog").add_child(new_child)
 	var chatlog_card = new_child.duplicate()
 	if primeira_vez:
-		ChatsLog.npc_teste["chat_log"][_id] = chatlog_card
-	print(ChatsLog.npc_teste.chat_log)
+		ChatsLog[npc_alvo]["chat_log"][_id] = chatlog_card
+	print(ChatsLog[npc_alvo].chat_log)
 func navega_chat_log():
 		if Input.is_action_pressed("ui_up"):
 			get_node("ScrollContainer").scroll_vertical -= 10
 		elif Input.is_action_pressed("ui_down"):
 			get_node("ScrollContainer").scroll_vertical += 10
-		elif Input.is_action_just_pressed("ui_left"):
+		elif Input.is_action_just_pressed("ui_right"):
 			var tween = create_tween()
 			tween.tween_property(get_node("ScrollContainer"), "scroll_vertical", get_node("ScrollContainer").get_v_scroll_bar( ).max_value, 0.5)
-		elif Input.is_action_just_pressed("ui_right"):
+		elif Input.is_action_just_pressed("ui_left"):
 			var tween = create_tween()
 			tween.tween_property(get_node("ScrollContainer"), "scroll_vertical", get_node("ScrollContainer").get_v_scroll_bar( ).min_value, 0.5)
 func cria_containers():

@@ -130,7 +130,8 @@ var _dialog_data_again: Dictionary = {
 
 @export_category("Objects")
 @export var _hud: CanvasLayer = null
-
+func _ready():
+	ChatsLog.chat_ativo = "npc_teste"; #especifica qual o npc do diálogo para uso em outros scripts;
 func _input(event):
 	if Input.is_action_just_pressed("z") and ativo and _hud.get_child_count() == 0:
 		animator = anim_name.get_parent().get_node("CalebAnimation")
