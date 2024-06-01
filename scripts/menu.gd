@@ -7,6 +7,7 @@ var caminho_array = ["Menu_1"]
 var positivo
 var negativo
 var permite = false
+var chave_navega = true
 var voltar_ativado = true
 var config = ConfigsGlobais
 var dicionario = {
@@ -18,6 +19,8 @@ func _ready():
 		dicionario[str(child.get_path())] = card_volta
 	print(dicionario)
 	$".".hide()
+	get_node("Inventario").hide()
+	get_node("Mochila_Options").hide()
 	verifica()
 func _input(event):
 	if config._menu == true:
@@ -41,6 +44,9 @@ func _input(event):
 					permite = true
 					verifica_volta()
 					voltar()
+					get_node("Inventario").hide()
+					if caminho == "Mochila_Options":
+						get_node("Mochila_Options").show()
 				else:
 					menu *= -1
 					get_tree().paused = false
@@ -59,10 +65,21 @@ func verifica():
 		negativo = "ui_up"
 		
 func navegar(valor):
+	if caminho == "Menu_1" : chave_navega = true
 	if get_node(caminho).get_child_count() > 1:
 		control += valor
 		get_node(caminho).get_child(control).modulate = "Red"
 		get_node(caminho).get_child(control - valor).modulate = "White"
+		if chave_navega:
+			if get_node(caminho).get_child(control).name == "Equipar" or get_node(caminho).get_child(control).name == "Habilidades":
+				get_node("Modificar_Menu").show()
+			else:
+				get_node("Modificar_Menu").hide()
+			if get_node(caminho).get_child(control).name == "Mochila":
+				get_node("Mochila_Options").show()
+			else:
+				get_node("Mochila_Options").hide()
+	
 
 func modificar_action():
 	if get_node(caminho) == get_node("Modificar_Menu") and permite:
@@ -71,10 +88,19 @@ func modificar_action():
 				muda(str(child.get_path()))
 				card_tween(str(child.get_path()), child.name)
 		permite = false
-	if get_node(caminho).get_child(control).name == "Equipar" or get_node(caminho).get_child(control).name == "Habilidades":
+	elif get_node(caminho).get_child(control).name == "Equipar" or get_node(caminho).get_child(control).name == "Habilidades":
 		muda("Modificar_Menu")
 		permite = true
-
+		chave_navega = false
+	elif get_node(caminho).get_child(control).name == "Mochila":
+		chave_navega = false
+		get_node("Mochila_Options").show()
+		muda("Mochila_Options")
+	elif get_node(caminho).name == "Mochila_Options":
+		print(get_node(caminho).get_child(control).name)
+		get_node("Mochila_Options").hide()
+		get_node("Inventario").show()
+		muda("Inventario/Container/ItensPanel/Itens")
 func muda(func_caminho):
 	control_save.append(control)#Armazena o control para depois voltar ao mesmo lugar que estava
 	caminho = func_caminho

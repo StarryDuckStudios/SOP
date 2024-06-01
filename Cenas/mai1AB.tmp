@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_l7ph0"]
 [ext_resource type="PackedScene" uid="uid://diqel02yd22ke" path="res://Cenas/seguidor.tscn" id="3_rfqnh"]
 [ext_resource type="Texture2D" uid="uid://tb4v6k3qfi24" path="res://sprites/Caleb/walk_r_3.png" id="5_1reaq"]
-[ext_resource type="Script" path="res://scripts/_dialog_test.gd" id="5_tgna4"]
+[ext_resource type="Script" path="res://scripts/Dialogos/_dialog_test.gd" id="5_bw7o6"]
 [ext_resource type="PackedScene" uid="uid://b6gw6ltmrw7rf" path="res://Cenas/menu.tscn" id="5_uhm7t"]
 
 [sub_resource type="TileSet" id="TileSet_f8u1w"]
@@ -53,10 +53,11 @@ format = 2
 [node name="HUD" type="CanvasLayer" parent="."]
 process_mode = 3
 
-[node name="Npc" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_hud")]
+[node name="Npc" type="CharacterBody2D" parent="."]
 y_sort_enabled = true
-script = ExtResource("5_tgna4")
-_hud = NodePath("../HUD")
+script = ExtResource("5_bw7o6")
+_hud = Object(CanvasLayer,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":3,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","layer":1,"visible":true,"offset":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"transform":Transform2D(1, 0, 0, 1, 0, 0),"follow_viewport_enabled":false,"follow_viewport_scale":1.0,"script":null)
+
 
 [node name="Sprite2D" type="Sprite2D" parent="Npc"]
 position = Vector2(-56, 20)
@@ -72,26 +73,6 @@ position = Vector2(-0.000488281, 237.334)
 scale = Vector2(0.904977, 1)
 shape = SubResource("RectangleShape2D_ivt74")
 
-[node name="Npc2" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_hud")]
-y_sort_enabled = true
-position = Vector2(40, 0)
-script = ExtResource("5_tgna4")
-_hud = NodePath("../HUD")
-
-[node name="Sprite2D" type="Sprite2D" parent="Npc2"]
-position = Vector2(-95, -12)
-scale = Vector2(0.017, 0.0168539)
-texture = ExtResource("5_1reaq")
-offset = Vector2(-10, 0)
-
-[node name="Area2D" type="Area2D" parent="Npc2/Sprite2D"]
-position = Vector2(0, -0.00012207)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Npc2/Sprite2D/Area2D"]
-position = Vector2(-0.000488281, 237.334)
-scale = Vector2(0.904977, 1)
-shape = SubResource("RectangleShape2D_ivt74")
-
 [connection signal="change_character" from="." to="Personagem" method="change_character"]
 [connection signal="change_character" from="." to="Seguidor" method="change_character"]
 [connection signal="change_character" from="." to="Seguidor2" method="change_character"]
@@ -101,5 +82,3 @@ shape = SubResource("RectangleShape2D_ivt74")
 [connection signal="seguir" from="Personagem" to="Seguidor3" method="seguir"]
 [connection signal="area_entered" from="Npc/Sprite2D/Area2D" to="Npc" method="Ativo"]
 [connection signal="area_exited" from="Npc/Sprite2D/Area2D" to="Npc" method="Inativo"]
-[connection signal="area_entered" from="Npc2/Sprite2D/Area2D" to="Npc2" method="Ativo"]
-[connection signal="area_exited" from="Npc2/Sprite2D/Area2D" to="Npc2" method="Inativo"]

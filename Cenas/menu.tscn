@@ -1,9 +1,53 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6gw6ltmrw7rf"]
+[gd_scene load_steps=7 format=3 uid="uid://b6gw6ltmrw7rf"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_pftyu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_injrq"]
-bg_color = Color(0.6, 0.6, 0.6, 0.247059)
+bg_color = Color(0.6, 0.6, 0.6, 0.290196)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fww2j"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56asb"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kn4ql"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4y7im"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 
 [node name="Menu" type="Control"]
 process_mode = 3
@@ -14,6 +58,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pftyu")
+
+[node name="Layout_Maior" type="Panel" parent="."]
+layout_mode = 2
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 1127.0
+offset_bottom = 626.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_injrq")
 
 [node name="CalebContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -81,26 +135,191 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="Layout_Maior" type="Panel" parent="."]
+[node name="Mochila_Options" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 25.0
-offset_top = 25.0
-offset_right = -25.0
-offset_bottom = -25.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -179.0
+offset_right = 451.0
+offset_bottom = 241.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_injrq")
 
-[node name="Equipar_Panel" type="Panel" parent="Layout_Maior"]
+[node name="Consumiveis" type="Panel" parent="Mochila_Options"]
+custom_minimum_size = Vector2(301, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_fww2j")
+
+[node name="LabelTitlePT" type="RichTextLabel" parent="Mochila_Options/Consumiveis"]
 visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.5
+offset_top = -30.5
+offset_right = 123.5
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Consumiveis"
+scroll_active = false
+
+[node name="LabelTitleEN" type="RichTextLabel" parent="Mochila_Options/Consumiveis"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -30.5
+offset_right = 81.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Supplies"
+scroll_active = false
+
+[node name="ItensChave" type="Panel" parent="Mochila_Options"]
+custom_minimum_size = Vector2(301, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_56asb")
+
+[node name="LabelTitlePT" type="RichTextLabel" parent="Mochila_Options/ItensChave"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -30.5
+offset_right = 112.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Itens Chave"
+scroll_active = false
+
+[node name="LabelTitleEN" type="RichTextLabel" parent="Mochila_Options/ItensChave"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.5
+offset_top = -30.0
+offset_right = 100.5
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Key Itens"
+scroll_active = false
+
+[node name="Equipaveis" type="Panel" parent="Mochila_Options"]
+custom_minimum_size = Vector2(301, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_kn4ql")
+
+[node name="LabelTitlePT" type="RichTextLabel" parent="Mochila_Options/Equipaveis"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.0
+offset_top = -30.5
+offset_right = 106.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Equipaveis"
+scroll_active = false
+
+[node name="LabelTitleEN" type="RichTextLabel" parent="Mochila_Options/Equipaveis"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -30.5
+offset_right = 100.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Gear Itens"
+scroll_active = false
+
+[node name="Inventario" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -179.0
+offset_right = 451.0
+offset_bottom = 241.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="Panel" parent="Inventario"]
+custom_minimum_size = Vector2(450, 420)
 layout_mode = 0
-offset_left = 50.0
-offset_top = 80.0
-offset_right = 1052.0
-offset_bottom = 578.0
+offset_left = 460.0
+offset_right = 910.0
+offset_bottom = 420.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4y7im")
+
+[node name="ItensPanel" type="ScrollContainer" parent="Inventario/Container"]
+custom_minimum_size = Vector2(430, 400)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 445.0
+offset_bottom = 415.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 0
+
+[node name="Itens" type="VBoxContainer" parent="Inventario/Container/ItensPanel"]
+custom_minimum_size = Vector2(440, 410)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Inventario/Container/ItensPanel/Itens"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "dadadadadadadadada"
+
+[node name="Descricao" type="Panel" parent="Inventario"]
+custom_minimum_size = Vector2(450, 420)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4y7im")
 
 [node name="Menu_1" type="HBoxContainer" parent="."]
 layout_mode = 0

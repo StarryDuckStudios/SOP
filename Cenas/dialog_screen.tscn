@@ -4,7 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://b3p4wu1sai88x" path="res://sprites/Caleb/Expressions/Caleb_Expression_3.png" id="2_joktb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbrhn"]
-bg_color = Color(0.6, 0.6, 0.6, 0.290196)
+bg_color = Color(0.6, 0.6, 0.6, 0.262745)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bm3vl"]
 
@@ -32,9 +37,9 @@ visible = false
 custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 offset_left = 7.0
-offset_top = 5.0
+offset_top = -129.0
 offset_right = 697.0
-offset_bottom = 49.0
+offset_bottom = -85.0
 theme_override_font_sizes/normal_font_size = 30
 text = " Você é meio estranho?
 "

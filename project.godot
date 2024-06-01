@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 ConfigsGlobais="*res://scripts/configs_globais.gd"
 ChatsLog="*res://scripts/chats_log.gd"
+Inventario="*res://scripts/Inventario.gd"
 
 [display]
 
