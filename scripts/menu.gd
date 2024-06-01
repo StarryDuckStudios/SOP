@@ -9,6 +9,8 @@ var negativo
 var permite = false
 var chave_navega = true
 var voltar_ativado = true
+signal monta_inv(data)
+signal monta_desc(data)
 var config = ConfigsGlobais
 var dicionario = {
 }
@@ -54,6 +56,8 @@ func _input(event):
 			$".".hide()
 			get_node(caminho).get_child(control).modulate = "White"
 			control = 0 #Zera o control pois estamos saindo do menu
+			get_node("Mochila_Options").hide()
+			get_node("Modificar_Menu").show()
 			verifica()
 func verifica():
 	get_node(caminho).get_child(control).modulate = "Red"
@@ -79,8 +83,8 @@ func navegar(valor):
 				get_node("Mochila_Options").show()
 			else:
 				get_node("Mochila_Options").hide()
-	
-
+		if caminho == "Inventario/Container/ItensPanel/Itens":
+			emit_signal("monta_desc", get_node(caminho).get_child(control).name)
 func modificar_action():
 	if get_node(caminho) == get_node("Modificar_Menu") and permite:
 		for child in get_node("Modificar_Menu").get_children():
@@ -97,7 +101,7 @@ func modificar_action():
 		get_node("Mochila_Options").show()
 		muda("Mochila_Options")
 	elif get_node(caminho).name == "Mochila_Options":
-		print(get_node(caminho).get_child(control).name)
+		emit_signal("monta_inv",str(get_node(caminho).get_child(control).name))
 		get_node("Mochila_Options").hide()
 		get_node("Inventario").show()
 		muda("Inventario/Container/ItensPanel/Itens")
@@ -136,6 +140,3 @@ func card_volta():
 	for child in get_node("Modificar_Menu").get_children():
 		child.show()
 		await get_tree().create_timer(0.1).timeout
-		
-
-	

@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var party_pos = 2
 @export var name_ = ""
 @export var ativo = true
-var textura = "res://sprites/Morgana_SpriteSheet.png"
+var textura = "res://sprites/Caleb/caleb_spritesheet.png"
 func _ready():
 	$Sprite2D.texture = load(textura)
 func seguir():

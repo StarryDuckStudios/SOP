@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6gw6ltmrw7rf"]
+[gd_scene load_steps=8 format=3 uid="uid://b6gw6ltmrw7rf"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_pftyu"]
+[ext_resource type="Script" path="res://scripts/Inventario.gd" id="2_tx7fw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_injrq"]
 bg_color = Color(0.6, 0.6, 0.6, 0.290196)
@@ -273,7 +274,6 @@ text = "Gear Itens"
 scroll_active = false
 
 [node name="Inventario" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -286,6 +286,7 @@ offset_right = 451.0
 offset_bottom = 241.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_tx7fw")
 
 [node name="Container" type="Panel" parent="Inventario"]
 custom_minimum_size = Vector2(450, 420)
@@ -303,16 +304,11 @@ offset_top = 5.0
 offset_right = 445.0
 offset_bottom = 415.0
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="Itens" type="VBoxContainer" parent="Inventario/Container/ItensPanel"]
 custom_minimum_size = Vector2(440, 410)
 layout_mode = 2
-
-[node name="Label" type="Label" parent="Inventario/Container/ItensPanel/Itens"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "dadadadadadadadada"
 
 [node name="Descricao" type="Panel" parent="Inventario"]
 custom_minimum_size = Vector2(450, 420)
@@ -320,6 +316,37 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4y7im")
+
+[node name="TextureRect" type="TextureRect" parent="Inventario/Descricao"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -170.0
+offset_right = 115.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inventario/Descricao"]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = 69.0
+offset_right = 215.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 20
 
 [node name="Menu_1" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -356,3 +383,13 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 30
 text = "Opções"
 scroll_active = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 40
+
+[connection signal="monta_desc" from="." to="Inventario" method="monta_desc"]
+[connection signal="monta_inv" from="." to="Inventario" method="monta_inv"]
+[connection signal="montagem_pronta" from="Inventario" to="." method="montagem_pronta"]

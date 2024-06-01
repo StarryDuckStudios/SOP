@@ -1,11 +1,13 @@
 extends Node
+var alvo
+signal montagem_pronta
 var consumiveis = {
 	"Item_1" = {
-		"portugues" = {
+		"pt" = {
 			"name" : "Poção de cura",
 			"descricao" : "Uma poção capaz de regenerar sua vitalidade!"
 		},
-		"ingles" = {
+		"En" = {
 			"name" : "Life potion",
 			"descricao" : "A potions able to regen your vitality!"
 		},
@@ -15,11 +17,11 @@ var consumiveis = {
 		}
 		},
 	"Item_2" = {
-		"portugues" = {
+		"pt" = {
 			"name" : "Poção de mana",
 			"descricao" : "Uma poção capaz de regenerar sua mana!"
 		},
-		"ingles" = {
+		"En" = {
 			"name" : "Mana Potion",
 			"descricao" : "A potions able to regen your mana!"
 		},
@@ -31,11 +33,11 @@ var consumiveis = {
 	}
 var itens_chave = {
 	"Item_1" = {
-		"portugues" = {
+		"pt" = {
 			"name" : "Chave",
 			"descricao" : "uma chave misteriosa"
 		},
-		"ingles" = {
+		"En" = {
 			"name" : "Key",
 			"descricao" : "a mistyrious key"
 		},
@@ -47,11 +49,11 @@ var itens_chave = {
 	}
 var equipaveis = {
 	"Item_1" = {
-		"portugues" = {
+		"pt" = {
 			"name" : "Faca",
 			"descricao" : "Um objeto de cozinha extremamaente cortante"
 		},
-		"ingles" = {
+		"En" = {
 			"name" : "Knife",
 			"descricao" : "A kitchen utensil extremely sharpnes"
 		},
@@ -62,6 +64,17 @@ var equipaveis = {
 		}
 }
 # Called when the node enters the scene tree for the first time.
+func cria_label():
+	for child in get_node("Container/ItensPanel/Itens").get_children():
+		child.free()
+	for key in alvo.keys():
+		var item = alvo[key][ConfigsGlobais.language]["name"] + ": x" + str(alvo[key]["propriedades"]["quantidade"]) 
+		var label = $"../Label".duplicate()
+		label.name = key
+		label.text = item
+		print(label.name)
+		get_node("Container/ItensPanel/Itens").add_child(label)
+	monta_desc("Item_1")
 func _ready():
 	pass # Replace with function body.
 
@@ -69,3 +82,19 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+
+func monta_inv(data):
+	if data == "Consumiveis":
+		alvo = consumiveis
+	elif data == "ItensChave":
+		alvo = itens_chave
+	else:
+		alvo = equipaveis
+	cria_label()
+
+
+func monta_desc(data):
+	get_node("Descricao/TextureRect").texture = load(alvo[data]["propriedades"]["texture"])
+	get_node("Descricao/RichTextLabel").text = alvo[data][ConfigsGlobais.language]["descricao"]
