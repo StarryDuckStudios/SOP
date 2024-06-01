@@ -14,7 +14,22 @@ signal monta_desc(data)
 var config = ConfigsGlobais
 var dicionario = {
 }
+func seta_lingua():
+	var language 
+	if config.language == "pt":
+		language = 0
+	else:
+		language = 1
+	for child in get_node("Mochila_Options").get_children():
+		for granChild in child.get_children():
+			granChild.hide()
+		child.get_child(language).show()
+	for child in get_node("Menu_1").get_children():
+		for granChild in child.get_children():
+			granChild.hide()
+		child.get_child(language).show()
 func _ready():
+	seta_lingua()
 	print(str(get_tree().get_current_scene().get_path()))
 	#Monta o dicionário conforme a cena
 	for child in get_node("Modificar_Menu").get_children():
