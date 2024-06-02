@@ -1,0 +1,271 @@
+[gd_scene load_steps=7 format=3 uid="uid://bm3w8sst5lvba"]
+
+[ext_resource type="Script" path="res://scripts/marketer.gd" id="1_q1akd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2d4h"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1h7ci"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l7smh"]
+bg_color = Color(0.0156863, 0.0156863, 0.0156863, 1)
+border_width_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbg8v"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t8wgb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q1akd")
+
+[node name="Fundo" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g2d4h")
+
+[node name="Container" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 374.0
+offset_right = 972.0
+offset_bottom = 618.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1h7ci")
+
+[node name="Options" type="Panel" parent="Container"]
+layout_mode = 0
+offset_left = 567.0
+offset_top = 2.0
+offset_right = 790.0
+offset_bottom = 242.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_l7smh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Comprar" type="Panel" parent="Container/Options/VBoxContainer"]
+layout_mode = 2
+
+[node name="pt" type="Label" parent="Container/Options/VBoxContainer/Comprar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = 10.0
+offset_right = 52.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Comprar"
+
+[node name="en" type="Label" parent="Container/Options/VBoxContainer/Comprar"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.5
+offset_top = 19.0
+offset_right = -1.5
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Buy"
+
+[node name="Vender" type="Panel" parent="Container/Options/VBoxContainer"]
+layout_mode = 2
+
+[node name="pt" type="Label" parent="Container/Options/VBoxContainer/Vender"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = 50.0
+offset_right = 54.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Vender"
+
+[node name="en" type="Label" parent="Container/Options/VBoxContainer/Vender"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.5
+offset_top = 52.0
+offset_right = -6.5
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Sell"
+
+[node name="Conversar" type="Panel" parent="Container/Options/VBoxContainer"]
+layout_mode = 2
+
+[node name="pt" type="Label" parent="Container/Options/VBoxContainer/Conversar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.5
+offset_top = 90.0
+offset_right = 73.5
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Conversar"
+
+[node name="en" type="Label" parent="Container/Options/VBoxContainer/Conversar"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.5
+offset_top = 85.0
+offset_right = 6.5
+offset_bottom = 143.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Talk"
+
+[node name="Sair" type="Panel" parent="Container/Options/VBoxContainer"]
+layout_mode = 2
+
+[node name="pt" type="Label" parent="Container/Options/VBoxContainer/Sair"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.5
+offset_top = 130.0
+offset_right = 75.5
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Sair"
+
+[node name="en" type="Label" parent="Container/Options/VBoxContainer/Sair"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.5
+offset_top = 118.0
+offset_right = 6.5
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Exit"
+
+[node name="Label" type="Label" parent="Container/Options"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 13.0
+offset_top = 88.0
+offset_right = 71.0
+offset_bottom = 119.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "2000$"
+
+[node name="Loja" type="Panel" parent="Container"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 9.0
+offset_right = 509.0
+offset_bottom = 237.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cbg8v")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Container/Loja"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/Loja/ScrollContainer"]
+layout_mode = 2
+
+[node name="Dialogo" type="Panel" parent="Container"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 559.0
+offset_bottom = 234.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_t8wgb")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Container/Dialogo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "*Bem vindo à minha loja!"
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 231.0
+offset_top = 391.0
+offset_right = 401.0
+offset_bottom = 429.0
+theme_override_font_sizes/font_size = 25
+text = "Poção de cura"

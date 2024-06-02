@@ -73,11 +73,10 @@ position = Vector2(-0.000488281, 237.334)
 scale = Vector2(0.904977, 1)
 shape = SubResource("RectangleShape2D_ivt74")
 
-[node name="Mercador" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_hud")]
+[node name="Mercador" type="CharacterBody2D" parent="."]
 y_sort_enabled = true
 position = Vector2(-45, -32)
 script = ExtResource("7_24bgj")
-_hud = NodePath("../HUD")
 
 [node name="Sprite2D" type="Sprite2D" parent="Mercador"]
 position = Vector2(-56, 20)
@@ -100,8 +99,6 @@ shape = SubResource("RectangleShape2D_ivt74")
 [connection signal="seguir" from="Personagem" to="Seguidor" method="seguir"]
 [connection signal="seguir" from="Personagem" to="Seguidor2" method="seguir"]
 [connection signal="seguir" from="Personagem" to="Seguidor3" method="seguir"]
-[connection signal="monta_desc" from="Camera2D/Menu" to="Camera2D/Menu/Inventario" method="monta_desc" flags=18]
-[connection signal="monta_inv" from="Camera2D/Menu" to="Camera2D/Menu/Inventario" method="monta_inv" flags=18]
 [connection signal="area_entered" from="Npc/Sprite2D/Area2D" to="Npc" method="Ativo"]
 [connection signal="area_exited" from="Npc/Sprite2D/Area2D" to="Npc" method="Inativo"]
 [connection signal="area_entered" from="Mercador/Sprite2D/Area2D" to="Mercador" method="Ativo"]

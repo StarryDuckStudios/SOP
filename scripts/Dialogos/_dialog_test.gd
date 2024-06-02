@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Level
 var ativo = false
 var anim_name
+@onready var self_anim = self.get_node("Sprite2D")
 var animator = AnimationPlayer
 const _DIALOG_SCREEN: PackedScene = preload("res://Cenas/dialog_screen.tscn")
 var traduz_pos = {
@@ -9,6 +10,13 @@ var traduz_pos = {
 	"Area L" : "idle_l",
 	"Area U" : "idle_u",
 	"Area D" : "idle_d",
+}
+#Gambiarra pro npc virar pro personagem
+var traduz_self_pos = {
+	"Area R" : "walk_l_3",
+	"Area L" : "walk_r_3",
+	"Area U" : "walk_d_3",
+	"Area D" : "walk_up_3",
 }
 var _dialog_data: Dictionary = {
 	0: {
@@ -137,6 +145,8 @@ func _input(event):
 		animator = anim_name.get_parent().get_node("CalebAnimation")
 		animator.play(traduz_pos[anim_name.name]) #Faz o player virar para o npc
 		
+		#Gambiarra pro npc virar pro personagem
+		self_anim.texture = load("res://sprites/Caleb/"+traduz_self_pos[anim_name.name] + ".png")
 		var _new_dialog: DialogScreen = _DIALOG_SCREEN.instantiate()
 		if ChatsLog.npc_teste.primeira_vez == true:
 			_new_dialog.data = _dialog_data
