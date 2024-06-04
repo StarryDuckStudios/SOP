@@ -100,6 +100,8 @@ func navegar(valor):
 				get_node("Mochila_Options").hide()
 		if caminho == "Inventario/Container/ItensPanel/Itens":
 			emit_signal("monta_desc", get_node(caminho).get_child(control).name)
+	if caminho == "Inventario/Container/ItensPanel/Itens":
+		get_node("Inventario/Container/ItensPanel").scroll_vertical += valor * 20
 func modificar_action():
 	if get_node(caminho) == get_node("Modificar_Menu") and permite:
 		for child in get_node("Modificar_Menu").get_children():

@@ -22,8 +22,8 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t8wgb"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="Animation" id="Animation_1l1rd"]
-resource_name = "aparece"
+[sub_resource type="Animation" id="Animation_ut8sh"]
+resource_name = "abre"
 length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -38,7 +38,7 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_x3d84"]
+[sub_resource type="Animation" id="Animation_tfelj"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -53,10 +53,10 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5xbnh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_usjq7"]
 _data = {
-"RESET": SubResource("Animation_x3d84"),
-"aparece": SubResource("Animation_1l1rd")
+"RESET": SubResource("Animation_tfelj"),
+"abre": SubResource("Animation_ut8sh")
 }
 
 [node name="Control" type="Control"]
@@ -276,31 +276,9 @@ offset_top = 8.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Container/Loja/ScrollContainer"]
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Container/Loja"]
-layout_mode = 0
-offset_left = 566.0
-offset_top = 3.0
-offset_right = 690.0
-offset_bottom = 121.0
-expand_mode = 1
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Container/Loja"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 527.0
-offset_top = 128.0
-offset_right = 265.0
-offset_bottom = -31.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 10
 
 [node name="Dialogo" type="Panel" parent="Container"]
 layout_mode = 0
@@ -332,5 +310,5 @@ text = "Poção de cura"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_5xbnh")
+"": SubResource("AnimationLibrary_usjq7")
 }

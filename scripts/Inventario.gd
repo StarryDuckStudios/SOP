@@ -1,6 +1,10 @@
 extends Node
 var alvo
 signal montagem_pronta
+var inv_vazio = {
+	"pt" : "Seu inventário está vázio!",
+	"En" : "Your inventory is empty!"
+}
 var consumiveis = {
 	"Item_1" = {
 		"pt" = {
@@ -12,6 +16,7 @@ var consumiveis = {
 			"descricao" : "A potions able to regen your vitality!"
 		},
 		"propriedades" ={
+			"preco" : 200,
 			"quantidade" : 5,
 			"texture" : "res://sprites/itens/Health Potion 1.png"
 		}
@@ -26,6 +31,97 @@ var consumiveis = {
 			"descricao" : "A potions able to regen your mana!"
 		},
 		"propriedades" ={
+			"preco" : 200,
+			"quantidade" : 5,
+			"texture" : "res://sprites/itens/Antidote 1.png"
+		}
+		},
+	"Item_3" = {
+		"pt" = {
+			"name" : "Poção de cura",
+			"descricao" : "Uma poção capaz de regenerar sua vitalidade!"
+		},
+		"En" = {
+			"name" : "Life potion",
+			"descricao" : "A potions able to regen your vitality!"
+		},
+		"propriedades" ={
+			"preco" : 200,
+			"quantidade" : 5,
+			"texture" : "res://sprites/itens/Health Potion 1.png"
+		}
+		},
+	"Item_4" = {
+		"pt" = {
+			"name" : "Poção de mana",
+			"descricao" : "Uma poção capaz de regenerar sua mana!"
+		},
+		"En" = {
+			"name" : "Mana Potion",
+			"descricao" : "A potions able to regen your mana!"
+		},
+		"propriedades" ={
+			"preco" : 200,
+			"quantidade" : 5,
+			"texture" : "res://sprites/itens/Antidote 1.png"
+		}
+		},
+	"Item_5" = {
+		"pt" = {
+			"name" : "Poção de cura",
+			"descricao" : "Uma poção capaz de regenerar sua vitalidade!"
+		},
+		"En" = {
+			"name" : "Life potion",
+			"descricao" : "A potions able to regen your vitality!"
+		},
+		"propriedades" ={
+			"preco" : 200,
+			"quantidade" : 5,
+			"texture" : "res://sprites/itens/Health Potion 1.png"
+		}
+		},
+	"Item_6" = {
+		"pt" = {
+			"name" : "Poção de mana",
+			"descricao" : "Uma poção capaz de regenerar sua mana!"
+		},
+		"En" = {
+			"name" : "Mana Potion",
+			"descricao" : "A potions able to regen your mana!"
+		},
+		"propriedades" ={
+			"preco" : 200,
+			"quantidade" : 5,
+			"texture" : "res://sprites/itens/Antidote 1.png"
+		}
+		},
+	"Item_7" = {
+		"pt" = {
+			"name" : "Poção de cura",
+			"descricao" : "Uma poção capaz de regenerar sua vitalidade!"
+		},
+		"En" = {
+			"name" : "Life potion",
+			"descricao" : "A potions able to regen your vitality!"
+		},
+		"propriedades" ={
+			"preco" : 200,
+			"quantidade" : 5,
+			"texture" : "res://sprites/itens/Health Potion 1.png"
+		}
+		},
+	"Item_8" = {
+		"pt" = {
+			"name" : "Poção de mana",
+			"descricao" : "Uma poção capaz de regenerar sua mana!"
+		},
+		"En" = {
+			"name" : "Mana Potion",
+			"descricao" : "A potions able to regen your mana!"
+		},
+		"propriedades" ={
+			"preco" : 200,
 			"quantidade" : 5,
 			"texture" : "res://sprites/itens/Antidote 1.png"
 		}
@@ -42,7 +138,7 @@ var itens_chave = {
 			"descricao" : "a mistyrious key"
 		},
 		"propriedades" ={
-			"quantidade" : 1,
+			"quantidade" : 0,
 			"texture" : "res://sprites/itens/key-bluee.png"
 		}
 		}
@@ -68,22 +164,22 @@ func cria_label():
 	for child in get_node("Container/ItensPanel/Itens").get_children():
 		child.free()
 	for key in alvo.keys():
-		var item = alvo[key][ConfigsGlobais.language]["name"] + ": x" + str(alvo[key]["propriedades"]["quantidade"]) 
+		if alvo[key]["propriedades"]["quantidade"] > 0:
+			var item = alvo[key][ConfigsGlobais.language]["name"] + ": x" + str(alvo[key]["propriedades"]["quantidade"]) 
+			var label = $"../Label".duplicate()
+			label.name = key
+			label.text = item
+			print(label.name)
+			get_node("Container/ItensPanel/Itens").add_child(label)
+	if get_node("Container/ItensPanel/Itens").get_child_count() == 0:
+		get_node("Descricao/TextureRect").texture = load("res://sprites/teia_sprite.jpg")
+		get_node("Descricao/RichTextLabel").text = ""
 		var label = $"../Label".duplicate()
-		label.name = key
-		label.text = item
-		print(label.name)
+		label.name = "erro"
+		label.text = inv_vazio[ConfigsGlobais.language]
 		get_node("Container/ItensPanel/Itens").add_child(label)
-	monta_desc("Item_1")
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
+	else:
+		monta_desc("Item_1")
 
 func monta_inv(data):
 	if data == "Consumiveis":

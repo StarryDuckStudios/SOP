@@ -19,16 +19,34 @@ var traduz_self_pos = {
 }
 var marketer_data: Dictionary = {
 	"Item_1" = {
-		"pt" : "Poção de cura",
-		"En" : "Life potion",
-		"qtd" : 5,
-		"preco" : 200
+		"pt" = {
+			"nome" :  "Poção de Cura",
+			"descricao" : "Uma poção capaz de regenerar sua vitalidade!"
+		},
+		"En" = {
+			"nome" : "Life potion",
+			"descricao" : "A potions able to regen your vitality!"
+		},
+		"propriedades" = {
+			"qtd" : 2,
+			"preco" : 100,
+			"textura" : "res://sprites/itens/Health Potion 1.png"
+		}
 	},
 	"Item_2" = {
-		"pt" : "Poção de Mana",
-		"En" : "Mana potion",
-		"qtd" : 2,
-		"preco" : 100
+		"pt" = {
+			"nome" :  "Poção de Mana",
+			"descricao" : "Uma poção capaz de regenerar sua mana!"
+		},
+		"En" = {
+			"nome" : "Mana potion",
+			"descricao" : "A potions able to regen your mana!"
+		},
+		"propriedades" = {
+			"qtd" : 2,
+			"preco" : 100,
+			"textura" : "res://sprites/itens/Antidote 1.png"
+		}
 	}
 }
 @export_category("Objects")
