@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6gw6ltmrw7rf"]
+[gd_scene load_steps=10 format=3 uid="uid://b6gw6ltmrw7rf"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_pftyu"]
 [ext_resource type="Script" path="res://scripts/Inventario.gd" id="2_tx7fw"]
@@ -51,6 +51,17 @@ corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rsu88"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dd4fg"]
 bg_color = Color(0, 0, 0, 1)
 border_width_left = 2
 border_width_top = 2
@@ -148,6 +159,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="Mochila_Options" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -482,6 +494,24 @@ offset_bottom = 40.0
 theme_override_font_sizes/normal_font_size = 30
 text = "Options"
 scroll_active = false
+
+[node name="Money" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 896.0
+offset_top = 160.0
+offset_right = 1027.0
+offset_bottom = 200.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dd4fg")
+
+[node name="Label" type="Label" parent="Money"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 43.0
+theme_override_font_sizes/font_size = 23
+text = "$2000"
+horizontal_alignment = 1
 
 [connection signal="monta_desc" from="." to="Inventario" method="monta_desc"]
 [connection signal="monta_inv" from="." to="Inventario" method="monta_inv"]

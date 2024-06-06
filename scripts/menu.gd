@@ -29,6 +29,12 @@ func seta_lingua():
 			granChild.hide()
 		child.get_child(language).show()
 func _ready():
+	get_node("Money/Label").text = "$" + str(InvGlobal.dinheiro)
+	#self.size.x = 1152
+	#self.size.y = 648
+	#self.position.x = -144
+	#self.position.y = -80
+	#self.scale = Vector2(0.25,0.25)
 	seta_lingua()
 	print(str(get_tree().get_current_scene().get_path()))
 	#Monta o dicionário conforme a cena
@@ -42,6 +48,7 @@ func _ready():
 func _input(event):
 	if config._menu == true:
 		if Input.is_action_just_pressed("x") and menu == -1:
+			get_node("Money/Label").text = "$" + str(InvGlobal.dinheiro)
 			await get_tree().create_timer(0.1).timeout 
 			menu *= -1
 			get_tree().paused = true
@@ -91,9 +98,11 @@ func navegar(valor):
 		get_node(caminho).get_child(control - valor).modulate = "White"
 		if chave_navega:
 			if get_node(caminho).get_child(control).name == "Equipar" or get_node(caminho).get_child(control).name == "Habilidades":
+				get_node("Money").show()
 				get_node("Modificar_Menu").show()
 			else:
 				get_node("Modificar_Menu").hide()
+				get_node("Money").hide()
 			if get_node(caminho).get_child(control).name == "Mochila":
 				get_node("Mochila_Options").show()
 			else:
@@ -118,6 +127,7 @@ func modificar_action():
 		get_node("Mochila_Options").show()
 		muda("Mochila_Options")
 	elif get_node(caminho).name == "Mochila_Options":
+		get_node("Inventario/Container/ItensPanel").scroll_vertical = 0
 		emit_signal("monta_inv",str(get_node(caminho).get_child(control).name))
 		get_node("Mochila_Options").hide()
 		get_node("Inventario").show()

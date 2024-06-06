@@ -1,6 +1,7 @@
 extends Node2D
 signal change_character
 var seguidores_ = ["Seguidor","Seguidor2","Seguidor3" ]
+@onready var alvo: = $Personagem
 func _ready():
 	party_ativo()
 	print($Seguidor.party_pos)
@@ -8,16 +9,16 @@ func _ready():
 	print($Seguidor3.party_pos)
 func _input(event):
 	if Input.is_action_just_pressed("1"):
-		if $Personagem.name_ != "caleb":
+		if alvo.name_ != "caleb":
 			change_2("caleb")
 	elif Input.is_action_just_pressed("2"):
-		if $Personagem.name_ != "morgana":
+		if alvo.name_ != "morgana":
 			change_2("morgana")
 	elif Input.is_action_just_pressed("3"):
-		if $Personagem.name_ != "teste":
+		if alvo.name_ != "teste":
 			change_2("teste")
 	elif Input.is_action_just_pressed("4"):
-		if $Personagem.name_ != "teste2":
+		if alvo.name_ != "teste2":
 			change_2("teste2")
 
 func change_(seguidor):	
@@ -25,12 +26,12 @@ func change_(seguidor):
 	var temp_name
 	#name
 	temp_name = seguidor.name_
-	seguidor.name_ = $Personagem.name_
-	$Personagem.name_ = temp_name
+	seguidor.name_ = alvo.name_
+	alvo.name_ = temp_name
 	#sprite
 	temp_txt = seguidor.textura
-	seguidor.textura = $Personagem.textura
-	$Personagem.textura = temp_txt
+	seguidor.textura = alvo.textura
+	alvo.textura = temp_txt
 	emit_signal("change_character")
 	
 func change_2(tag):
@@ -46,3 +47,6 @@ func party_ativo():
 			for seg_ in seguidores_:
 				if $".".get_node(seg_).ativo and $".".get_node(seg_).party_pos >= $".".get_node(seg).party_pos:
 					$".".get_node(seg_).party_pos -=1
+
+
+

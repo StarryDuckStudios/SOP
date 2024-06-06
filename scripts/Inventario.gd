@@ -5,161 +5,16 @@ var inv_vazio = {
 	"pt" : "Seu inventário está vázio!",
 	"En" : "Your inventory is empty!"
 }
-var consumiveis = {
-	"Item_1" = {
-		"pt" = {
-			"name" : "Poção de cura",
-			"descricao" : "Uma poção capaz de regenerar sua vitalidade!"
-		},
-		"En" = {
-			"name" : "Life potion",
-			"descricao" : "A potions able to regen your vitality!"
-		},
-		"propriedades" ={
-			"preco" : 200,
-			"quantidade" : 5,
-			"texture" : "res://sprites/itens/Health Potion 1.png"
-		}
-		},
-	"Item_2" = {
-		"pt" = {
-			"name" : "Poção de mana",
-			"descricao" : "Uma poção capaz de regenerar sua mana!"
-		},
-		"En" = {
-			"name" : "Mana Potion",
-			"descricao" : "A potions able to regen your mana!"
-		},
-		"propriedades" ={
-			"preco" : 200,
-			"quantidade" : 5,
-			"texture" : "res://sprites/itens/Antidote 1.png"
-		}
-		},
-	"Item_3" = {
-		"pt" = {
-			"name" : "Poção de cura",
-			"descricao" : "Uma poção capaz de regenerar sua vitalidade!"
-		},
-		"En" = {
-			"name" : "Life potion",
-			"descricao" : "A potions able to regen your vitality!"
-		},
-		"propriedades" ={
-			"preco" : 200,
-			"quantidade" : 5,
-			"texture" : "res://sprites/itens/Health Potion 1.png"
-		}
-		},
-	"Item_4" = {
-		"pt" = {
-			"name" : "Poção de mana",
-			"descricao" : "Uma poção capaz de regenerar sua mana!"
-		},
-		"En" = {
-			"name" : "Mana Potion",
-			"descricao" : "A potions able to regen your mana!"
-		},
-		"propriedades" ={
-			"preco" : 200,
-			"quantidade" : 5,
-			"texture" : "res://sprites/itens/Antidote 1.png"
-		}
-		},
-	"Item_5" = {
-		"pt" = {
-			"name" : "Poção de cura",
-			"descricao" : "Uma poção capaz de regenerar sua vitalidade!"
-		},
-		"En" = {
-			"name" : "Life potion",
-			"descricao" : "A potions able to regen your vitality!"
-		},
-		"propriedades" ={
-			"preco" : 200,
-			"quantidade" : 5,
-			"texture" : "res://sprites/itens/Health Potion 1.png"
-		}
-		},
-	"Item_6" = {
-		"pt" = {
-			"name" : "Poção de mana",
-			"descricao" : "Uma poção capaz de regenerar sua mana!"
-		},
-		"En" = {
-			"name" : "Mana Potion",
-			"descricao" : "A potions able to regen your mana!"
-		},
-		"propriedades" ={
-			"preco" : 200,
-			"quantidade" : 5,
-			"texture" : "res://sprites/itens/Antidote 1.png"
-		}
-		},
-	"Item_7" = {
-		"pt" = {
-			"name" : "Poção de cura",
-			"descricao" : "Uma poção capaz de regenerar sua vitalidade!"
-		},
-		"En" = {
-			"name" : "Life potion",
-			"descricao" : "A potions able to regen your vitality!"
-		},
-		"propriedades" ={
-			"preco" : 200,
-			"quantidade" : 5,
-			"texture" : "res://sprites/itens/Health Potion 1.png"
-		}
-		},
-	"Item_8" = {
-		"pt" = {
-			"name" : "Poção de mana",
-			"descricao" : "Uma poção capaz de regenerar sua mana!"
-		},
-		"En" = {
-			"name" : "Mana Potion",
-			"descricao" : "A potions able to regen your mana!"
-		},
-		"propriedades" ={
-			"preco" : 200,
-			"quantidade" : 5,
-			"texture" : "res://sprites/itens/Antidote 1.png"
-		}
-		}
-	}
-var itens_chave = {
-	"Item_1" = {
-		"pt" = {
-			"name" : "Chave",
-			"descricao" : "uma chave misteriosa"
-		},
-		"En" = {
-			"name" : "Key",
-			"descricao" : "a mistyrious key"
-		},
-		"propriedades" ={
-			"quantidade" : 0,
-			"texture" : "res://sprites/itens/key-bluee.png"
-		}
-		}
-	}
-var equipaveis = {
-	"Item_1" = {
-		"pt" = {
-			"name" : "Faca",
-			"descricao" : "Um objeto de cozinha extremamaente cortante"
-		},
-		"En" = {
-			"name" : "Knife",
-			"descricao" : "A kitchen utensil extremely sharpnes"
-		},
-		"propriedades" ={
-			"quantidade" : 1,
-			"texture" : "res://sprites/itens/key-bluee.png"
-		}
-		}
-}
+var consumiveis : Dictionary 
+var itens_chave  : Dictionary 
+var equipaveis  : Dictionary 
 # Called when the node enters the scene tree for the first time.
+func _input(event):
+	consumiveis = InvGlobal.consumiveis
+	itens_chave = InvGlobal.itens_chave
+	equipaveis = InvGlobal.equipaveis
+	if Input.is_action_just_pressed("ui_accept"):
+		print(consumiveis)
 func cria_label():
 	for child in get_node("Container/ItensPanel/Itens").get_children():
 		child.free()
@@ -183,10 +38,13 @@ func cria_label():
 
 func monta_inv(data):
 	if data == "Consumiveis":
+		consumiveis = InvGlobal.consumiveis
 		alvo = consumiveis
 	elif data == "ItensChave":
+		itens_chave = InvGlobal.itens_chave
 		alvo = itens_chave
 	else:
+		equipaveis = InvGlobal.equipaveis
 		alvo = equipaveis
 	cria_label()
 
@@ -194,3 +52,5 @@ func monta_inv(data):
 func monta_desc(data):
 	get_node("Descricao/TextureRect").texture = load(alvo[data]["propriedades"]["texture"])
 	get_node("Descricao/RichTextLabel").text = alvo[data][ConfigsGlobais.language]["descricao"]
+func retiraItem(caminho, qtd):
+	consumiveis[caminho].propriedades.quantidade -= qtd

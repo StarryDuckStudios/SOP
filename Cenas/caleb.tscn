@@ -6,8 +6,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d00tg"]
 size = Vector2(16, 16)
 
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_e4v2p"]
-
 [sub_resource type="Animation" id="Animation_01l4k"]
 length = 0.001
 tracks/0/type = "value"
@@ -271,6 +269,8 @@ _data = {
 "walk_r": SubResource("Animation_eiqwr"),
 "walk_u": SubResource("Animation_qiy6c")
 }
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_e4v2p"]
 
 [sub_resource type="Animation" id="Animation_xm5s6"]
 length = 0.001
@@ -557,6 +557,9 @@ hframes = 12
 frame = 6
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_07aia")
+}
 tree_root = SubResource("AnimationNodeBlendSpace2D_e4v2p")
 anim_player = NodePath("../CalebAnimation")
 parameters/blend_position = Vector2(-0.77669, 0.616766)

@@ -36,32 +36,32 @@ func _process(_delta):
 	if Input.is_action_just_pressed("z") and data[_id]["type"] == "fala" and chatlog_on == false:
 		_id += 1
 		if _id == data.size():
-			ChatsLog[npc_alvo].primeira_vez = false
-			configs._menu = true
-			get_tree().paused = false
-			queue_free()
+			encerra()
 			return
-		if data[_id]["type"] == "resposta":
+		elif data[_id]["type"] == "resposta":
 			cria_containers()
 		_initialize_dialog()
 	
 func _initialize_dialog():
-	if data[_id]["type"] == "fala":
-		get_node("BackGround").show()
-		get_node("Responder_Container").hide()
-		_name.text = data[_id]["title"]
-		_dialog.text = data[_id][dialog][configs.language]
-		_faceset.texture = load(data[_id]["faceset"])
-		duplica_card(data[_id][dialog][configs.language])
-	elif data[_id]["type"] == "resposta":
-		get_node("Responder_Container").show()
-		get_node("BackGround").hide()
-		
-	_dialog.visible_characters = 0
-	while _dialog.visible_ratio < 1:
-		await get_tree().create_timer(_step).timeout
-		_dialog.visible_characters += 1
-
+	if data[_id][dialog][configs.language] == "":
+		encerra()
+		return
+	else:
+		if data[_id]["type"] == "fala":
+			get_node("BackGround").show()
+			get_node("Responder_Container").hide()
+			_name.text = data[_id]["title"]
+			_dialog.text = data[_id][dialog][configs.language]
+			_faceset.texture = load(data[_id]["faceset"])
+			duplica_card(data[_id][dialog][configs.language])
+		elif data[_id]["type"] == "resposta":
+			get_node("Responder_Container").show()
+			get_node("BackGround").hide()
+			
+		_dialog.visible_characters = 0
+		while _dialog.visible_ratio < 1:
+			await get_tree().create_timer(_step).timeout
+			_dialog.visible_characters += 1
 #Parte de interação
 func _input(event):
 	if data[_id]["type"] == "resposta" and chatlog_on == false:
@@ -131,4 +131,8 @@ func cria_containers():
 		child.custom_minimum_size.y = 132/get_node("Responder_Container/VContainer").get_child_count()
 		child.text = data[_id]["dialog_" + str(i)][configs.language]
 		i += 1 
-
+func encerra():			
+	ChatsLog[npc_alvo].primeira_vez = false
+	configs._menu = true
+	get_tree().paused = false
+	queue_free()

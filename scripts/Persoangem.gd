@@ -11,7 +11,7 @@ var u = true
 var d = true
 var r = true
 var l = true
-var textura = "res://sprites/Caleb/caleb_spritesheet.png"
+@export var textura = "res://sprites/Caleb/caleb_spritesheet.png"
 signal seguir
 @export var pos = 1
 @export var animator: AnimationPlayer
@@ -61,7 +61,7 @@ func _input(event):
 				armazena.append_array([1,-1,"u",u])
 func tween():
 	var tween = create_tween()
-	tween.tween_property($".", "position", Vector2(curr_pos[0], curr_pos[1]), 0.5)
+	tween.tween_property($".", "position", Vector2(curr_pos[0], curr_pos[1]), 0.52)
 	movimentos.append(Vector2(curr_pos[0], curr_pos[1]))
 	tween.connect("finished", on_tween_finished)
 	#limpar lista

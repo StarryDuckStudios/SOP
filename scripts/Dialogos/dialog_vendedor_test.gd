@@ -1,7 +1,7 @@
 extends CharacterBody2D
 var ativo = false
 var anim_name
-@onready var self_anim = self.get_node("Sprite2D")
+@export var selfAnim : AnimationPlayer
 var animator = AnimationPlayer
 const _DIALOG_SCREEN: PackedScene = preload("res://Cenas/marketer.tscn")
 var traduz_pos = {
@@ -12,46 +12,17 @@ var traduz_pos = {
 }
 #Gambiarra pro npc virar pro personagem
 var traduz_self_pos = {
-	"Area R" : "walk_l_3",
-	"Area L" : "walk_r_3",
-	"Area U" : "walk_d_3",
-	"Area D" : "walk_up_3",
+	"Area R" : "idle_l",
+	"Area L" : "idle_r",
+	"Area U" : "idle_d",
+	"Area D" : "idle_u",
 }
-var marketer_data: Dictionary = {
-	"Item_1" = {
-		"pt" = {
-			"nome" :  "Poção de Cura",
-			"descricao" : "Uma poção capaz de regenerar sua vitalidade!"
-		},
-		"En" = {
-			"nome" : "Life potion",
-			"descricao" : "A potions able to regen your vitality!"
-		},
-		"propriedades" = {
-			"qtd" : 2,
-			"preco" : 100,
-			"textura" : "res://sprites/itens/Health Potion 1.png"
-		}
-	},
-	"Item_2" = {
-		"pt" = {
-			"nome" :  "Poção de Mana",
-			"descricao" : "Uma poção capaz de regenerar sua mana!"
-		},
-		"En" = {
-			"nome" : "Mana potion",
-			"descricao" : "A potions able to regen your mana!"
-		},
-		"propriedades" = {
-			"qtd" : 2,
-			"preco" : 100,
-			"textura" : "res://sprites/itens/Antidote 1.png"
-		}
-	}
-}
+@onready var marketer_data: Dictionary = $Node.txt
+@onready var falas_aleatorias: Dictionary =$Node.txtDiag
 @export_category("Objects")
 @export var _hud: CanvasLayer = null
 func _ready():
+	selfAnim.play("idle_d")
 	ChatsLog.chat_ativo = "npc_teste"; #especifica qual o npc do diálogo para uso em outros scripts;
 func _input(event):
 	if Input.is_action_just_pressed("z") and ativo and _hud.get_child_count() == 0:
@@ -59,9 +30,11 @@ func _input(event):
 		animator.play(traduz_pos[anim_name.name]) #Faz o player virar para o npc
 		
 		#Gambiarra pro npc virar pro personagem
-		self_anim.texture = load("res://sprites/Caleb/"+traduz_self_pos[anim_name.name] + ".png")
+		selfAnim.play(traduz_self_pos[anim_name.name])
 		var _new_dialog = _DIALOG_SCREEN.instantiate()
 		_new_dialog.data = marketer_data
+		_new_dialog.dialogo_dicionario = falas_aleatorias
+		
 		_hud.add_child(_new_dialog)
 	
 func Ativo(body):

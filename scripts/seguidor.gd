@@ -3,18 +3,17 @@ extends CharacterBody2D
 @export var party_pos = 2
 @export var name_ = ""
 @export var ativo = true
-var textura = "res://sprites/Caleb/caleb_spritesheet.png"
+@onready var alvo: CharacterBody2D = $"../Personagem"
+@export var textura = "res://sprites/Caleb/caleb_spritesheet.png"
 func _ready():
 	$Sprite2D.texture = load(textura)
 func seguir():
-	if $"../Personagem".move_historic.size() >= party_pos:
+	if alvo.move_historic.size() >= party_pos:
 		var tween = create_tween()
-		animator.play("walk_" + $"../Personagem".move_historic[$"../Personagem".move_historic.size() - party_pos ])
-		print($"../Personagem".move_historic)
-		print($"../Personagem".movimentos)
-		tween.tween_property(self, "position", Vector2($"../Personagem".movimentos[$"../Personagem".movimentos.size() - party_pos][0], $"../Personagem".movimentos[$"../Personagem".movimentos.size() - party_pos][1]), 0.5)
+		animator.play("walk_" + alvo.move_historic[alvo.move_historic.size() - party_pos ])
+		tween.tween_property(self, "position", Vector2(alvo.movimentos[alvo.movimentos.size() - party_pos][0], alvo.movimentos[alvo.movimentos.size() - party_pos][1]), 0.5)
 		await animator.animation_finished
-		animator.play("idle_" + str($"../Personagem".move_historic[$"../Personagem".move_historic.size() - party_pos]))
+		animator.play("idle_" + str(alvo.move_historic[alvo.move_historic.size() - party_pos]))
 
 func change_character():
 	$Sprite2D.texture = load(textura)

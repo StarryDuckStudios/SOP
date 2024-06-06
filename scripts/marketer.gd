@@ -1,8 +1,9 @@
 extends Control
 var control = 0
+var invVazio = false
 var config = ConfigsGlobais
 @onready var _dialog = get_node("Container/Dialogo/RichTextLabel")
-@onready var menu_options = get_node(caminho)
+@onready var dinheiro = get_node("Container/Options/Label")
 var _step: float = 0.05
 var operacao
 var language = ConfigsGlobais.language
@@ -40,24 +41,14 @@ var data: Dictionary = {
 		}
 	}
 }
-var dialogo_dicionario = {
-	"falas_aleatorias" ={
-		"pt" = {
-			1 : "*Seja bem vindo a minha loja!",
-			2 : "*Muito bom te ver por aqui!",
-			3 : "*Olá forasteiro deseja comprar algo?"
-		},
-		"En" = {
-			1 : "*Welcome to my store!",
-			2 : "*Very pleasead to see you here",
-			3 : "*Hello foreigner, do you wish to see anything?"
-		}
-	}
+var dialogo_dicionario: Dictionary = {
+
 }
 
 func _ready():
+	dinheiro.text = str(InvGlobal.dinheiro) + "$"
 	$AnimationPlayer.play("aparece")
-	$Container/Dialogo/RichTextLabel.text = dialogo_dicionario["falas_aleatorias"][language][int(randf_range(1,4))]
+	$Container/Dialogo/RichTextLabel.text = dialogo_dicionario["falas_aleatorias"][language][int(randf_range(1,3.99))]
 	dialogo()
 	get_node(caminho).get_child(control).modulate = "Red"
 	#get_tree().paused = true
@@ -82,7 +73,8 @@ func navegar(valor):
 		monta_item(data)
 	if caminho == "Container/Loja/ScrollContainer/VBoxContainer" and operacao == "venda":
 		get_node("Container/Loja/ScrollContainer").scroll_vertical += valor * 20
-		monta_item(Inventario.consumiveis)
+		monta_item(InvGlobal.consumiveis)
+		print(get_node(caminho).get_child(control).name)
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_down"):
@@ -92,14 +84,31 @@ func _input(event):
 		if control > 0:
 			navegar(-1)
 	if Input.is_action_just_pressed("z"):
-		if menu_options.get_child(control).name  == "Sair":
+		if get_node(caminho).get_child(control).name  == "Sair" and caminho == "Container/Options/VBoxContainer":
 			sair()
-		if menu_options.get_child(control).name  == "Comprar" and caminho == "Container/Options/VBoxContainer":
+		elif get_node(caminho).get_child(control).name  == "Comprar" and caminho == "Container/Options/VBoxContainer":
 			operacao = "compra"
 			comprar(data)
-		if menu_options.get_child(control).name  == "Vender" and caminho == "Container/Options/VBoxContainer":
+		elif get_node(caminho).get_child(control).name  == "Vender" and caminho == "Container/Options/VBoxContainer":
 			operacao = "venda"
-			comprar(Inventario.consumiveis)
+			comprar(InvGlobal.consumiveis)
+		elif "Item_" in get_node(caminho).get_child(control).name and operacao == "compra":
+			var inv = InvGlobal.consumiveis
+			var key = get_node(caminho).get_child(control).name
+			if InvGlobal.dinheiro >= data[key]["propriedades"]["preco"]:
+				InvGlobal.dinheiro -= max(0, data[key]["propriedades"]["preco"])
+				dinheiro.text = str(InvGlobal.dinheiro) + "$"
+				inv[key]["propriedades"]["quantidade"] += 1
+			print(inv[key]["propriedades"]["quantidade"])
+		elif "Item_" in get_node(caminho).get_child(control).name and operacao == "venda":
+			var inv = InvGlobal.consumiveis
+			var key = get_node(caminho).get_child(control).name
+			if inv[key]["propriedades"]["quantidade"] > 0:
+				inv[key]["propriedades"]["quantidade"] = max(0, inv[key]["propriedades"]["quantidade"] - 1)
+				InvGlobal.dinheiro += inv[key]["propriedades"]["preco"]
+				dinheiro.text = str(InvGlobal.dinheiro) + "$"
+			print(inv[key]["propriedades"]["quantidade"])
+			get_node(caminho).get_child(control).text =  inv[key][language]["name"] + " x" + str(inv[key]["propriedades"]["quantidade"])+ ": $"+str(inv[key]["propriedades"]["preco"])
 	if Input.is_action_just_pressed("x"):
 		voltar()
 func sair():
@@ -112,6 +121,7 @@ func dialogo():
 		await get_tree().create_timer(_step).timeout
 		_dialog.visible_characters += 1
 func comprar(data_):
+	get_node("Container/Loja/ScrollContainer").scroll_vertical = 0
 	get_node("Container/Options/VBoxContainer").hide()
 	get_node("Container/Dialogo").hide()
 	get_node("Container/Loja").show()
@@ -127,7 +137,20 @@ func criaLabel(data_):
 		var label = get_node("Label").duplicate()
 		label.show()
 		label.name = key
-		label.text = data_[key][language]["name"]+ ": $"+str(data_[key]["propriedades"]["preco"]) 
+		if operacao == "compra":
+			label.text = data_[key][language]["name"]+ ": $"+str(data_[key]["propriedades"]["preco"])
+		else:
+			label.text = data_[key][language]["name"] + " x" + str(data_[key]["propriedades"]["quantidade"])+ ": $"+str(data_[key]["propriedades"]["preco"])
+		if operacao == "venda" and data_[key]["propriedades"]["quantidade"] > 0:
+			get_node("Container/Loja/ScrollContainer/VBoxContainer").add_child(label)
+		elif operacao == "compra":
+			get_node("Container/Loja/ScrollContainer/VBoxContainer").add_child(label)
+	if get_node("Container/Loja/ScrollContainer/VBoxContainer").get_child_count() == 0:
+		var label = get_node("Label").duplicate()
+		invVazio = true
+		label.show()
+		label.name =  Inventario.inv_vazio[language]
+		label.text = "Nenhum item disponível para venda!"
 		get_node("Container/Loja/ScrollContainer/VBoxContainer").add_child(label)
 func voltar():
 	if caminho == "Container/Loja/ScrollContainer/VBoxContainer":
@@ -139,11 +162,15 @@ func voltar():
 			control = 0
 		else:
 			control = 1
-		get_node(caminho).get_child(control).modulate = "White"
 		caminho_array.pop_back()
 		caminho = caminho_array[caminho_array.size() -1]
 		print(caminho_array)
 func monta_item(data_):
 	get_node(caminho).get_child(control).modulate = "Red"
-	get_node("Container/Loja/TextureRect").texture = load(data_[get_node(caminho).get_child(control).name]["propriedades"]["texture"])
-	get_node("Container/Loja/RichTextLabel").text = data_[get_node(caminho).get_child(control).name][language]["descricao"]
+	if invVazio == false:
+		get_node("Container/Loja/TextureRect").texture = load(data_[get_node(caminho).get_child(control).name]["propriedades"]["texture"])
+		get_node("Container/Loja/RichTextLabel").text = data_[get_node(caminho).get_child(control).name][language]["descricao"]
+	else:
+		invVazio = false
+		get_node("Container/Loja/TextureRect").texture = load("res://sprites/teia_sprite.jpg")
+		get_node("Container/Loja/RichTextLabel").text = ""

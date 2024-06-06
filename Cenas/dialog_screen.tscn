@@ -33,6 +33,7 @@ _dialog = NodePath("BackGround/Hcontainer/VContainer/RichTextLabel")
 _faceset = NodePath("BackGround/Hcontainer/Border/FaceSet")
 
 [node name="Opcao_1" type="RichTextLabel" parent="."]
+visible = false
 custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 offset_left = 7.0
