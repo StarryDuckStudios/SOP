@@ -11,7 +11,7 @@ var u = true
 var d = true
 var r = true
 var l = true
-@export var textura = "res://sprites/Caleb/caleb_spritesheet.png"
+@export var textura = "res://sprites/Caleb/caleb_spriteSheetNew.png"
 signal seguir
 @export var pos = 1
 @export var animator: AnimationPlayer

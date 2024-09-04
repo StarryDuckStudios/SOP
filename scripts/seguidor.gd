@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var name_ = ""
 @export var ativo = true
 @onready var alvo: CharacterBody2D = $"../Personagem"
-@export var textura = "res://sprites/Caleb/caleb_spritesheet.png"
+@export var textura = "res://sprites/Caleb/caleb_spriteSheetNew.png"
 func _ready():
 	$Sprite2D.texture = load(textura)
 func seguir():

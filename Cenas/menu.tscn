@@ -1,7 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6gw6ltmrw7rf"]
+[gd_scene load_steps=22 format=3 uid="uid://b6gw6ltmrw7rf"]
 
-[ext_resource type="Script" path="res://scripts/menu.gd" id="1_pftyu"]
+[ext_resource type="Script" path="res://scripts/menu_new.gd" id="1_s7kyc"]
+[ext_resource type="Shader" path="res://Shaders/blur_shader.gdshader" id="2_ohqbn"]
 [ext_resource type="Script" path="res://scripts/Inventario.gd" id="2_tx7fw"]
+[ext_resource type="Script" path="res://scripts/personagem_card.gd" id="3_en08p"]
+[ext_resource type="Script" path="res://scripts/inventario_action.gd" id="3_ry7py"]
+[ext_resource type="Script" path="res://scripts/Modificar_Menu.gd" id="3_t3uft"]
+[ext_resource type="Script" path="res://scripts/Equipar.gd" id="4_b7lxm"]
+[ext_resource type="Script" path="res://scripts/Habilidades.gd" id="5_3felb"]
+[ext_resource type="Script" path="res://scripts/Itens.gd" id="5_enwq6"]
+[ext_resource type="Script" path="res://scripts/Mochila.gd" id="6_xjoki"]
+[ext_resource type="Script" path="res://scripts/Opcoes.gd" id="7_ww8ya"]
+[ext_resource type="Script" path="res://scripts/Idioma_Label.gd" id="8_8tjnw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dw2mx"]
+shader = ExtResource("2_ohqbn")
+shader_parameter/lod = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_injrq"]
 bg_color = Color(0.6, 0.6, 0.6, 0.290196)
@@ -72,6 +86,13 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nrgnf"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
 [node name="Menu" type="Control"]
 process_mode = 3
 layout_mode = 3
@@ -80,40 +101,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_pftyu")
+script = ExtResource("1_s7kyc")
 
 [node name="Layout_Maior" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_dw2mx")
 layout_mode = 2
-offset_left = 25.0
-offset_top = 25.0
-offset_right = 1127.0
-offset_bottom = 626.0
+offset_left = -53.0
+offset_top = -34.0
+offset_right = 1180.0
+offset_bottom = 687.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_injrq")
-
-[node name="CalebContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 150.0
-offset_top = 229.0
-offset_right = 350.0
-offset_bottom = 269.0
-
-[node name="Label" type="Label" parent="CalebContainer"]
-layout_mode = 2
-text = "aaaaa"
-
-[node name="Label2" type="Label" parent="CalebContainer"]
-layout_mode = 2
-text = "aaaaa"
-
-[node name="Label3" type="Label" parent="CalebContainer"]
-layout_mode = 2
-text = "aaaaa"
-
-[node name="Label4" type="Label" parent="CalebContainer"]
-layout_mode = 2
-text = "aaaaa"
 
 [node name="Modificar_Menu" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -121,10 +120,13 @@ offset_left = 115.0
 offset_top = 348.0
 offset_right = 1027.0
 offset_bottom = 623.0
+script = ExtResource("3_t3uft")
 
 [node name="Caleb" type="Panel" parent="Modificar_Menu"]
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
+script = ExtResource("3_en08p")
+name_personagem = "Caleb"
 
 [node name="child" type="Label" parent="Modificar_Menu/Caleb"]
 layout_mode = 0
@@ -134,6 +136,8 @@ offset_bottom = 23.0
 [node name="Morgana" type="Panel" parent="Modificar_Menu"]
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
+script = ExtResource("3_en08p")
+name_personagem = "Morgana"
 
 [node name="child" type="Label" parent="Modificar_Menu/Morgana"]
 layout_mode = 0
@@ -143,6 +147,8 @@ offset_bottom = 23.0
 [node name="Darcy" type="Panel" parent="Modificar_Menu"]
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
+script = ExtResource("3_en08p")
+name_personagem = "Darcy"
 
 [node name="child" type="Label" parent="Modificar_Menu/Darcy"]
 layout_mode = 0
@@ -152,6 +158,8 @@ offset_bottom = 23.0
 [node name="Dotty" type="Panel" parent="Modificar_Menu"]
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
+script = ExtResource("3_en08p")
+name_personagem = "Dotty"
 
 [node name="child" type="Label" parent="Modificar_Menu/Dotty"]
 layout_mode = 0
@@ -172,12 +180,15 @@ offset_right = 451.0
 offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("5_enwq6")
 
 [node name="Consumiveis" type="Panel" parent="Mochila_Options"]
 custom_minimum_size = Vector2(301, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_fww2j")
+script = ExtResource("3_ry7py")
+inventario = "Consumiveis"
 
 [node name="LabelTitlePT" type="RichTextLabel" parent="Mochila_Options/Consumiveis"]
 visible = false
@@ -219,6 +230,8 @@ custom_minimum_size = Vector2(301, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_56asb")
+script = ExtResource("3_ry7py")
+inventario = "ItensChave"
 
 [node name="LabelTitlePT" type="RichTextLabel" parent="Mochila_Options/ItensChave"]
 visible = false
@@ -260,6 +273,8 @@ custom_minimum_size = Vector2(301, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_kn4ql")
+script = ExtResource("3_ry7py")
+inventario = "Equipaveis"
 
 [node name="LabelTitlePT" type="RichTextLabel" parent="Mochila_Options/Equipaveis"]
 visible = false
@@ -387,22 +402,23 @@ offset_right = 1027.0
 offset_bottom = 154.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_rsu88")
 
-[node name="Menu_1" type="HBoxContainer" parent="."]
+[node name="Menu_1" type="HBoxContainer" parent="ContainerMenu_1"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -551.0
-offset_top = 85.0
-offset_right = 551.0
-offset_bottom = 125.0
+offset_left = -546.0
+offset_top = 33.0
+offset_right = 556.0
+offset_bottom = 73.0
 grow_horizontal = 2
 alignment = 1
 
-[node name="Equipar" type="Panel" parent="Menu_1"]
+[node name="Equipar" type="Panel" parent="ContainerMenu_1/Menu_1"]
 layout_mode = 2
+script = ExtResource("4_b7lxm")
 
-[node name="pt" type="RichTextLabel" parent="Menu_1/Equipar"]
+[node name="pt" type="RichTextLabel" parent="ContainerMenu_1/Menu_1/Equipar"]
 visible = false
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
@@ -413,7 +429,7 @@ theme_override_font_sizes/normal_font_size = 30
 text = "Equipar"
 scroll_active = false
 
-[node name="en" type="RichTextLabel" parent="Menu_1/Equipar"]
+[node name="en" type="RichTextLabel" parent="ContainerMenu_1/Menu_1/Equipar"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 offset_left = -380.0
@@ -423,10 +439,11 @@ theme_override_font_sizes/normal_font_size = 30
 text = "Equip"
 scroll_active = false
 
-[node name="Habilidades" type="Panel" parent="Menu_1"]
+[node name="Habilidades" type="Panel" parent="ContainerMenu_1/Menu_1"]
 layout_mode = 2
+script = ExtResource("5_3felb")
 
-[node name="pt" type="RichTextLabel" parent="Menu_1/Habilidades"]
+[node name="pt" type="RichTextLabel" parent="ContainerMenu_1/Menu_1/Habilidades"]
 visible = false
 custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
@@ -437,7 +454,7 @@ theme_override_font_sizes/normal_font_size = 30
 text = "Habilidades"
 scroll_active = false
 
-[node name="en" type="RichTextLabel" parent="Menu_1/Habilidades"]
+[node name="en" type="RichTextLabel" parent="ContainerMenu_1/Menu_1/Habilidades"]
 custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 offset_left = -176.0
@@ -447,10 +464,11 @@ theme_override_font_sizes/normal_font_size = 30
 text = "Skills"
 scroll_active = false
 
-[node name="Mochila" type="Panel" parent="Menu_1"]
+[node name="Mochila" type="Panel" parent="ContainerMenu_1/Menu_1"]
 layout_mode = 2
+script = ExtResource("6_xjoki")
 
-[node name="pt" type="RichTextLabel" parent="Menu_1/Mochila"]
+[node name="pt" type="RichTextLabel" parent="ContainerMenu_1/Menu_1/Mochila"]
 visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
@@ -461,7 +479,7 @@ theme_override_font_sizes/normal_font_size = 30
 text = "Mochila"
 scroll_active = false
 
-[node name="en" type="RichTextLabel" parent="Menu_1/Mochila"]
+[node name="en" type="RichTextLabel" parent="ContainerMenu_1/Menu_1/Mochila"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 offset_left = -10.0
@@ -471,10 +489,11 @@ theme_override_font_sizes/normal_font_size = 30
 text = "Bagpack"
 scroll_active = false
 
-[node name="Opcoes" type="Panel" parent="Menu_1"]
+[node name="Opcoes" type="Panel" parent="ContainerMenu_1/Menu_1"]
 layout_mode = 2
+script = ExtResource("7_ww8ya")
 
-[node name="pt" type="RichTextLabel" parent="Menu_1/Opcoes"]
+[node name="pt" type="RichTextLabel" parent="ContainerMenu_1/Menu_1/Opcoes"]
 visible = false
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
@@ -485,7 +504,7 @@ theme_override_font_sizes/normal_font_size = 30
 text = "Opções"
 scroll_active = false
 
-[node name="en" type="RichTextLabel" parent="Menu_1/Opcoes"]
+[node name="en" type="RichTextLabel" parent="ContainerMenu_1/Menu_1/Opcoes"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 offset_left = 220.0
@@ -513,6 +532,45 @@ theme_override_font_sizes/font_size = 23
 text = "$2000"
 horizontal_alignment = 1
 
-[connection signal="monta_desc" from="." to="Inventario" method="monta_desc"]
-[connection signal="monta_inv" from="." to="Inventario" method="monta_inv"]
-[connection signal="montagem_pronta" from="Inventario" to="." method="montagem_pronta"]
+[node name="Options" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(910, 420)
+layout_mode = 0
+offset_left = 117.0
+offset_top = 160.0
+offset_right = 1017.0
+offset_bottom = 580.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nrgnf")
+
+[node name="opcoes_box" type="VBoxContainer" parent="Options"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 8.0
+offset_right = 522.0
+offset_bottom = 412.0
+
+[node name="Idioma_Label" type="Panel" parent="Options/opcoes_box"]
+layout_mode = 2
+script = ExtResource("8_8tjnw")
+
+[node name="pt" type="RichTextLabel" parent="Options/opcoes_box/Idioma_Label"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 0
+offset_left = 7.0
+offset_top = -2.0
+offset_right = 892.0
+offset_bottom = 38.0
+theme_override_font_sizes/normal_font_size = 30
+text = "Idioma: Português(Brasil)"
+scroll_active = false
+
+[node name="en" type="RichTextLabel" parent="Options/opcoes_box/Idioma_Label"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 0
+offset_left = 7.0
+offset_top = -2.0
+offset_right = 896.0
+offset_bottom = 38.0
+theme_override_font_sizes/normal_font_size = 30
+text = "Language: English"
+scroll_active = false

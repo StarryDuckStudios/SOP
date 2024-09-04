@@ -33,10 +33,6 @@ zoom = Vector2(4.05, 4.05)
 [node name="Menu" parent="Camera2D" instance=ExtResource("5_uhm7t")]
 visible = false
 z_index = 100
-offset_left = -144.0
-offset_top = -80.0
-offset_right = 1008.0
-offset_bottom = 568.0
 scale = Vector2(0.25, 0.25)
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -49,5 +45,3 @@ process_mode = 3
 [connection signal="seguir" from="Personagem" to="Seguidor" method="seguir"]
 [connection signal="seguir" from="Personagem" to="Seguidor2" method="seguir"]
 [connection signal="seguir" from="Personagem" to="Seguidor3" method="seguir"]
-[connection signal="monta_desc" from="Camera2D/Menu" to="Camera2D/Menu/Inventario" method="monta_desc"]
-[connection signal="monta_inv" from="Camera2D/Menu" to="Camera2D/Menu/Inventario" method="monta_inv"]

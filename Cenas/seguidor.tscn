@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=3 uid="uid://diqel02yd22ke"]
 
 [ext_resource type="Script" path="res://scripts/seguidor.gd" id="1_1irsq"]
-[ext_resource type="Texture2D" uid="uid://si2uutcjxijf" path="res://sprites/Caleb/caleb_spritesheet.png" id="2_0tt67"]
+[ext_resource type="Texture2D" uid="uid://cuermc7jwg3iv" path="res://sprites/Caleb/caleb_spriteSheetNew.png" id="2_h3kfw"]
 
 [sub_resource type="Animation" id="Animation_xm5s6"]
 length = 0.001
@@ -544,9 +544,9 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(8, 4)
-scale = Vector2(0.017, 0.017)
-texture = ExtResource("2_0tt67")
+position = Vector2(9, 6)
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("2_h3kfw")
 offset = Vector2(-10, 0)
 hframes = 12
 frame = 5

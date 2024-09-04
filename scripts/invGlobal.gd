@@ -6,7 +6,7 @@ var consumiveis = {
 			"name" : "Poção de cura",
 			"descricao" : "Uma poção capaz de regenerar sua vitalidade!"
 		},
-		"En" = {
+		"en" = {
 			"name" : "Life potion",
 			"descricao" : "A potions able to regen your vitality!"
 		},
@@ -21,7 +21,7 @@ var consumiveis = {
 			"name" : "Poção de mana",
 			"descricao" : "Uma poção capaz de regenerar sua mana!"
 		},
-		"En" = {
+		"en" = {
 			"name" : "Mana Potion",
 			"descricao" : "A potions able to regen your mana!"
 		},

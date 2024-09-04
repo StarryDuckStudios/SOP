@@ -1,9 +1,8 @@
 extends Node
 var alvo
-signal montagem_pronta
 var inv_vazio = {
 	"pt" : "Seu inventário está vázio!",
-	"En" : "Your inventory is empty!"
+	"en" : "Your inventory is empty!"
 }
 var consumiveis : Dictionary 
 var itens_chave  : Dictionary 

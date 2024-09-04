@@ -1,60 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://d4l8vvuuyrws5"]
+[gd_scene load_steps=2 format=3 uid="uid://d4l8vvuuyrws5"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_nb7up"]
-[ext_resource type="PackedScene" uid="uid://3h28lxb02vva" path="res://Cenas/caleb.tscn" id="1_pgt0p"]
-[ext_resource type="PackedScene" uid="uid://diqel02yd22ke" path="res://Cenas/seguidor.tscn" id="2_awclk"]
-[ext_resource type="PackedScene" uid="uid://ck6licaj2bhvw" path="res://Cenas/Npc's/npc.tscn" id="4_j0q30"]
-[ext_resource type="PackedScene" uid="uid://b6gw6ltmrw7rf" path="res://Cenas/menu.tscn" id="4_w60jc"]
-[ext_resource type="PackedScene" uid="uid://cao81l62t0qjc" path="res://Cenas/Npc's/mercador.tscn" id="5_v2edt"]
+[ext_resource type="PackedScene" uid="uid://of253ajdmvb" path="res://Cenas/node_2d.tscn" id="12_gsaj4"]
 
 [node name="Nivel" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_nb7up")
+metadata/_edit_horizontal_guides_ = [-112.0]
 
-[node name="Personagem" parent="." instance=ExtResource("1_pgt0p")]
-name_ = "caleb"
-
-[node name="Seguidor" parent="." instance=ExtResource("2_awclk")]
-name_ = "morgana"
-
-[node name="Seguidor2" parent="." instance=ExtResource("2_awclk")]
-party_pos = 3
-name_ = "teste"
-
-[node name="Seguidor3" parent="." instance=ExtResource("2_awclk")]
-party_pos = 4
-name_ = "teste2"
-textura = "res://sprites/Morgana_SpriteSheet.png"
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
-
-[node name="Menu" parent="Camera2D" instance=ExtResource("4_w60jc")]
-visible = false
-z_index = 100
-offset_left = -144.0
-offset_top = -80.0
-offset_right = 1008.0
-offset_bottom = 568.0
-scale = Vector2(0.25, 0.25)
-
-[node name="_hud" type="CanvasLayer" parent="."]
-process_mode = 3
-
-[node name="npc" parent="." node_paths=PackedStringArray("_hud") instance=ExtResource("4_j0q30")]
-position = Vector2(24, 8)
-_hud = NodePath("../_hud")
-
-[node name="Mercador" parent="." node_paths=PackedStringArray("_hud") instance=ExtResource("5_v2edt")]
-position = Vector2(-8, 8)
-_hud = NodePath("../_hud")
-
-[connection signal="change_character" from="." to="Personagem" method="change_character"]
-[connection signal="change_character" from="." to="Seguidor" method="change_character"]
-[connection signal="change_character" from="." to="Seguidor2" method="change_character"]
-[connection signal="change_character" from="." to="Seguidor3" method="change_character"]
-[connection signal="seguir" from="Personagem" to="Seguidor" method="seguir"]
-[connection signal="seguir" from="Personagem" to="Seguidor2" method="seguir"]
-[connection signal="seguir" from="Personagem" to="Seguidor3" method="seguir"]
-[connection signal="monta_desc" from="Camera2D/Menu" to="Camera2D/Menu/Inventario" method="monta_desc"]
-[connection signal="monta_inv" from="Camera2D/Menu" to="Camera2D/Menu/Inventario" method="monta_inv"]
+[node name="Node2D" parent="." instance=ExtResource("12_gsaj4")]
+z_index = 1
+z_as_relative = false
+position = Vector2(208, 112)

@@ -1,6 +1,7 @@
 extends Control
 var control = 0
 var invVazio = false
+var loopOn = false
 var config = ConfigsGlobais
 @onready var _dialog = get_node("Container/Dialogo/RichTextLabel")
 @onready var dinheiro = get_node("Container/Options/Label")
@@ -95,20 +96,32 @@ func _input(event):
 		elif "Item_" in get_node(caminho).get_child(control).name and operacao == "compra":
 			var inv = InvGlobal.consumiveis
 			var key = get_node(caminho).get_child(control).name
-			if InvGlobal.dinheiro >= data[key]["propriedades"]["preco"]:
+			if InvGlobal.dinheiro >= data[key]["propriedades"]["preco"] and loopOn == false:
+				var armazena_dinheiro = InvGlobal.dinheiro
 				InvGlobal.dinheiro -= max(0, data[key]["propriedades"]["preco"])
-				dinheiro.text = str(InvGlobal.dinheiro) + "$"
+				while armazena_dinheiro > InvGlobal.dinheiro:
+					loopOn = true
+					dinheiro.text = str(armazena_dinheiro - 1)+ "$"
+					armazena_dinheiro -= 1
+					await get_tree().create_timer(0.01).timeout
+				loopOn = false
 				inv[key]["propriedades"]["quantidade"] += 1
 			print(inv[key]["propriedades"]["quantidade"])
 		elif "Item_" in get_node(caminho).get_child(control).name and operacao == "venda":
 			var inv = InvGlobal.consumiveis
 			var key = get_node(caminho).get_child(control).name
 			if inv[key]["propriedades"]["quantidade"] > 0:
+				var armazena_dinheiro = InvGlobal.dinheiro
 				inv[key]["propriedades"]["quantidade"] = max(0, inv[key]["propriedades"]["quantidade"] - 1)
 				InvGlobal.dinheiro += inv[key]["propriedades"]["preco"]
-				dinheiro.text = str(InvGlobal.dinheiro) + "$"
+				get_node(caminho).get_child(control).text =  inv[key][language]["name"] + " x" + str(inv[key]["propriedades"]["quantidade"])+ ": $"+str(inv[key]["propriedades"]["preco"])
+				while armazena_dinheiro < InvGlobal.dinheiro:
+					loopOn = true
+					dinheiro.text = str(armazena_dinheiro + 1)+ "$"
+					armazena_dinheiro += 1
+					await get_tree().create_timer(0.01).timeout
+				loopOn = false
 			print(inv[key]["propriedades"]["quantidade"])
-			get_node(caminho).get_child(control).text =  inv[key][language]["name"] + " x" + str(inv[key]["propriedades"]["quantidade"])+ ": $"+str(inv[key]["propriedades"]["preco"])
 	if Input.is_action_just_pressed("x"):
 		voltar()
 func sair():

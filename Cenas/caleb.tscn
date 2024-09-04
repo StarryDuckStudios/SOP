@@ -1,10 +1,12 @@
 [gd_scene load_steps=26 format=3 uid="uid://3h28lxb02vva"]
 
 [ext_resource type="Script" path="res://scripts/Persoangem.gd" id="1_j1ocp"]
-[ext_resource type="Texture2D" uid="uid://si2uutcjxijf" path="res://sprites/Caleb/caleb_spritesheet.png" id="2_woqtm"]
+[ext_resource type="Texture2D" uid="uid://cuermc7jwg3iv" path="res://sprites/Caleb/caleb_spriteSheetNew.png" id="2_h7crs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d00tg"]
 size = Vector2(16, 16)
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_e4v2p"]
 
 [sub_resource type="Animation" id="Animation_01l4k"]
 length = 0.001
@@ -269,8 +271,6 @@ _data = {
 "walk_r": SubResource("Animation_eiqwr"),
 "walk_u": SubResource("Animation_qiy6c")
 }
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_e4v2p"]
 
 [sub_resource type="Animation" id="Animation_xm5s6"]
 length = 0.001
@@ -539,29 +539,25 @@ _data = {
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_3hvrt"]
 b = Vector2(0, 8)
 
-[node name="Personagem" type="CharacterBody2D" node_paths=PackedStringArray("animator")]
+[node name="Personagem" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_j1ocp")
-animator = NodePath("CalebAnimation")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_d00tg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(8, 4)
-scale = Vector2(0.0167894, 0.0167481)
-texture = ExtResource("2_woqtm")
+y_sort_enabled = true
+position = Vector2(9, 6)
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("2_h7crs")
 offset = Vector2(-10, 0)
 hframes = 12
 frame = 6
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_07aia")
-}
 tree_root = SubResource("AnimationNodeBlendSpace2D_e4v2p")
-anim_player = NodePath("../CalebAnimation")
 parameters/blend_position = Vector2(-0.77669, 0.616766)
 
 [node name="CalebAnimation" type="AnimationPlayer" parent="."]

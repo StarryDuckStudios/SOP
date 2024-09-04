@@ -1,7 +1,10 @@
 extends Node2D
 signal change_character
+@export var _hud: CanvasLayer = null
+var ativo = false
 var seguidores_ = ["Seguidor","Seguidor2","Seguidor3" ]
 @onready var alvo: = $Personagem
+const menu: PackedScene = preload("res://Cenas/menu.tscn")
 func _ready():
 	party_ativo()
 	print($Seguidor.party_pos)
@@ -20,7 +23,10 @@ func _input(event):
 	elif Input.is_action_just_pressed("4"):
 		if alvo.name_ != "teste2":
 			change_2("teste2")
-
+	if Input.is_action_just_pressed("x"):
+		var _menu = menu.instantiate()
+		if _hud.get_child_count() == 0:
+			_hud.add_child(_menu)
 func change_(seguidor):	
 	var temp_txt
 	var temp_name
