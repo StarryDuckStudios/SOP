@@ -1,0 +1,917 @@
+[gd_scene load_steps=33 format=3 uid="uid://d762aykjp7nu"]
+
+[ext_resource type="Script" path="res://battle.gd" id="1_4dyqv"]
+[ext_resource type="Texture2D" uid="uid://b17f8dbf0mudp" path="res://sprites/fundo.jpg" id="1_dnvyn"]
+[ext_resource type="Texture2D" uid="uid://tb4v6k3qfi24" path="res://sprites/Caleb/walk_r_3.png" id="2_3uyry"]
+[ext_resource type="Script" path="res://control_battle.gd" id="3_vdehk"]
+[ext_resource type="Script" path="res://turns_battle.gd" id="3_xhw1p"]
+[ext_resource type="Texture2D" uid="uid://b5ubcw37nt71i" path="res://sprites/Morgana/walk_r_3.png" id="4_0mf6n"]
+[ext_resource type="Texture2D" uid="uid://b3p4wu1sai88x" path="res://sprites/Caleb/Expressions/Caleb_Expression_3.png" id="4_bmp5r"]
+[ext_resource type="Script" path="res://Enemy_ai.gd" id="4_pgftu"]
+[ext_resource type="Script" path="res://caleb_battle.gd" id="6_bsjm2"]
+[ext_resource type="Script" path="res://spellbar_battle.gd" id="6_ws4m6"]
+[ext_resource type="Script" path="res://Action_battle.gd" id="7_hmhoo"]
+[ext_resource type="Script" path="res://magia_action.gd" id="8_b6f5q"]
+[ext_resource type="Script" path="res://spell_battle.gd" id="11_7ml78"]
+
+[sub_resource type="Gradient" id="Gradient_5ff5r"]
+offsets = PackedFloat32Array(0.038961, 0.766234, 1)
+colors = PackedColorArray(0.499768, 0.0947581, 0.144733, 1, 0.396009, 0.0665134, 0.107262, 1, 0.371819, 0.0598717, 0.0984987, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bgley"]
+gradient = SubResource("Gradient_5ff5r")
+width = 2000
+height = 300
+fill_from = Vector2(0.20339, 0.474576)
+fill_to = Vector2(0.735593, 0.587571)
+
+[sub_resource type="Gradient" id="Gradient_bmm0n"]
+colors = PackedColorArray(0.592448, 2.20198e-06, 4.33177e-07, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t8v4o"]
+gradient = SubResource("Gradient_bmm0n")
+width = 2000
+height = 300
+fill_from = Vector2(0, 0.61017)
+fill_to = Vector2(1, 0.361582)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcg5d"]
+bg_color = Color(0, 0, 0, 1)
+border_width_top = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aofyr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3cqru"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r0t2g"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_right = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwwkv"]
+bg_color = Color(0.352941, 0.407843, 0.443137, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hv1l"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+
+[sub_resource type="Gradient" id="Gradient_tpv3g"]
+colors = PackedColorArray(0.339735, 6.22692e-07, 1.08294e-07, 1, 0.42644, 0.0520879, 0.0398206, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_03jck"]
+gradient = SubResource("Gradient_tpv3g")
+width = 140
+height = 20
+fill_from = Vector2(0.504274, 1)
+fill_to = Vector2(0.504274, 0)
+
+[sub_resource type="Gradient" id="Gradient_btqpn"]
+colors = PackedColorArray(0.787542, 4.16331e-06, 5.77569e-07, 1, 0.970912, 0.403881, 0.29985, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1iaw4"]
+gradient = SubResource("Gradient_btqpn")
+width = 140
+height = 20
+fill_from = Vector2(0.478632, 1)
+fill_to = Vector2(0.495726, 0)
+
+[sub_resource type="Gradient" id="Gradient_4uaxe"]
+colors = PackedColorArray(0, 0.0329659, 0.309886, 1, 0.16997, 0.000178565, 0.652162, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2vh6s"]
+gradient = SubResource("Gradient_4uaxe")
+width = 130
+height = 20
+fill_from = Vector2(0.555556, 1)
+fill_to = Vector2(0.641026, 0.0641026)
+
+[sub_resource type="Gradient" id="Gradient_4nvt4"]
+colors = PackedColorArray(5.96821e-06, 0, 0.951465, 1, 0.365168, 0.562944, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_63g0r"]
+gradient = SubResource("Gradient_4nvt4")
+width = 130
+height = 20
+fill_from = Vector2(0.598291, 1)
+fill_to = Vector2(0.547009, 0.24359)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ji6oe"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_right = 1
+
+[node name="Node2D" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_4dyqv")
+
+[node name="background" type="TextureRect" parent="."]
+offset_left = -425.0
+offset_right = 1572.0
+offset_bottom = 651.0
+texture = ExtResource("1_dnvyn")
+script = ExtResource("3_xhw1p")
+
+[node name="Enemys" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_pgftu")
+
+[node name="hp" type="TextureProgressBar" parent="."]
+anchors_preset = -1
+anchor_left = 0.493
+anchor_right = 0.5
+offset_left = 795.0
+offset_top = 763.0
+offset_right = 2795.0
+offset_bottom = 1063.0
+grow_horizontal = 2
+value = 50.0
+texture_under = SubResource("GradientTexture2D_bgley")
+texture_progress = SubResource("GradientTexture2D_t8v4o")
+metadata/_edit_use_anchors_ = true
+
+[node name="ally1" type="Sprite2D" parent="."]
+position = Vector2(129.5, 483.2)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_3uyry")
+
+[node name="ally2" type="Sprite2D" parent="."]
+position = Vector2(153, 342)
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("4_0mf6n")
+
+[node name="ally3" type="Sprite2D" parent="."]
+position = Vector2(128.5, 226.2)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_3uyry")
+
+[node name="ally4" type="Sprite2D" parent="."]
+position = Vector2(131.5, 106.2)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_3uyry")
+
+[node name="ActionBar" type="Panel" parent="."]
+offset_top = 544.0
+offset_right = 1149.0
+offset_bottom = 654.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rcg5d")
+script = ExtResource("3_vdehk")
+
+[node name="SpellContainer" type="Panel" parent="ActionBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 58.0
+offset_right = 3.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_aofyr")
+
+[node name="spellbar" type="HBoxContainer" parent="ActionBar/SpellContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("6_ws4m6")
+
+[node name="actionbarcontainer" type="HBoxContainer" parent="ActionBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 3.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="caleb" type="Panel" parent="ActionBar/actionbarcontainer"]
+custom_minimum_size = Vector2(285, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3cqru")
+script = ExtResource("6_bsjm2")
+
+[node name="Action" type="Panel" parent="ActionBar/actionbarcontainer/caleb"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r0t2g")
+
+[node name="Actions" type="HBoxContainer" parent="ActionBar/actionbarcontainer/caleb/Action"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 72.0
+offset_right = -4.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("7_hmhoo")
+
+[node name="item" type="Panel" parent="ActionBar/actionbarcontainer/caleb/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/caleb/Action/Actions/item"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.5
+offset_top = -12.0
+offset_right = 14.5
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "atk
+"
+
+[node name="item2" type="Panel" parent="ActionBar/actionbarcontainer/caleb/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+script = ExtResource("8_b6f5q")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/caleb/Action/Actions/item2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -11.5
+offset_right = 25.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "magia"
+
+[node name="item3" type="Panel" parent="ActionBar/actionbarcontainer/caleb/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/caleb/Action/Actions/item3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -11.5
+offset_right = 20.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "itens
+"
+
+[node name="item4" type="Panel" parent="ActionBar/actionbarcontainer/caleb/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/caleb/Action/Actions/item4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.5
+offset_top = -12.0
+offset_right = 14.5
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "run
+"
+
+[node name="info" type="Panel" parent="ActionBar/actionbarcontainer/caleb"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3hv1l")
+
+[node name="Name" type="RichTextLabel" parent="ActionBar/actionbarcontainer/caleb/info"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -53.5
+offset_right = 40.5
+offset_bottom = -30.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Calebito"
+
+[node name="hp" type="TextureProgressBar" parent="ActionBar/actionbarcontainer/caleb/info"]
+layout_mode = 0
+offset_left = 85.5
+offset_top = 48.0
+offset_right = 225.5
+offset_bottom = 68.0
+value = 100.0
+texture_under = SubResource("GradientTexture2D_03jck")
+texture_progress = SubResource("GradientTexture2D_1iaw4")
+
+[node name="mana" type="TextureProgressBar" parent="ActionBar/actionbarcontainer/caleb/info"]
+layout_mode = 0
+offset_left = 76.5
+offset_top = 70.0
+offset_right = 206.5
+offset_bottom = 90.0
+value = 100.0
+texture_under = SubResource("GradientTexture2D_2vh6s")
+texture_progress = SubResource("GradientTexture2D_63g0r")
+
+[node name="icon" type="TextureRect" parent="ActionBar/actionbarcontainer/caleb/info"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 110.0
+offset_bottom = 98.0
+texture = ExtResource("4_bmp5r")
+expand_mode = 2
+
+[node name="morgana" type="Panel" parent="ActionBar/actionbarcontainer"]
+custom_minimum_size = Vector2(285, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3cqru")
+script = ExtResource("6_bsjm2")
+
+[node name="Action" type="Panel" parent="ActionBar/actionbarcontainer/morgana"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r0t2g")
+
+[node name="Actions" type="HBoxContainer" parent="ActionBar/actionbarcontainer/morgana/Action"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 72.0
+offset_right = -4.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("7_hmhoo")
+
+[node name="item" type="Panel" parent="ActionBar/actionbarcontainer/morgana/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/morgana/Action/Actions/item"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.5
+offset_top = -12.0
+offset_right = 14.5
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "atk
+"
+
+[node name="item2" type="Panel" parent="ActionBar/actionbarcontainer/morgana/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+script = ExtResource("8_b6f5q")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/morgana/Action/Actions/item2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -11.5
+offset_right = 25.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "magia"
+
+[node name="item3" type="Panel" parent="ActionBar/actionbarcontainer/morgana/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/morgana/Action/Actions/item3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -11.5
+offset_right = 20.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "itens
+"
+
+[node name="item4" type="Panel" parent="ActionBar/actionbarcontainer/morgana/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/morgana/Action/Actions/item4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.5
+offset_top = -12.0
+offset_right = 14.5
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "run
+"
+
+[node name="info" type="Panel" parent="ActionBar/actionbarcontainer/morgana"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3hv1l")
+
+[node name="Name" type="RichTextLabel" parent="ActionBar/actionbarcontainer/morgana/info"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -53.5
+offset_right = 40.5
+offset_bottom = -30.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Calebito"
+
+[node name="hp" type="TextureProgressBar" parent="ActionBar/actionbarcontainer/morgana/info"]
+layout_mode = 0
+offset_left = 85.5
+offset_top = 48.0
+offset_right = 225.5
+offset_bottom = 68.0
+value = 100.0
+texture_under = SubResource("GradientTexture2D_03jck")
+texture_progress = SubResource("GradientTexture2D_1iaw4")
+
+[node name="mana" type="TextureProgressBar" parent="ActionBar/actionbarcontainer/morgana/info"]
+layout_mode = 0
+offset_left = 76.5
+offset_top = 70.0
+offset_right = 206.5
+offset_bottom = 90.0
+value = 100.0
+texture_under = SubResource("GradientTexture2D_2vh6s")
+texture_progress = SubResource("GradientTexture2D_63g0r")
+
+[node name="icon" type="TextureRect" parent="ActionBar/actionbarcontainer/morgana/info"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 110.0
+offset_bottom = 98.0
+texture = ExtResource("4_bmp5r")
+expand_mode = 2
+
+[node name="darcy" type="Panel" parent="ActionBar/actionbarcontainer"]
+custom_minimum_size = Vector2(285, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3cqru")
+script = ExtResource("6_bsjm2")
+
+[node name="Action" type="Panel" parent="ActionBar/actionbarcontainer/darcy"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r0t2g")
+
+[node name="Actions" type="HBoxContainer" parent="ActionBar/actionbarcontainer/darcy/Action"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 72.0
+offset_right = -4.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("7_hmhoo")
+
+[node name="item" type="Panel" parent="ActionBar/actionbarcontainer/darcy/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/darcy/Action/Actions/item"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.5
+offset_top = -12.0
+offset_right = 14.5
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "atk
+"
+
+[node name="item2" type="Panel" parent="ActionBar/actionbarcontainer/darcy/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+script = ExtResource("8_b6f5q")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/darcy/Action/Actions/item2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -11.5
+offset_right = 25.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "magia"
+
+[node name="item3" type="Panel" parent="ActionBar/actionbarcontainer/darcy/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/darcy/Action/Actions/item3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -11.5
+offset_right = 20.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "itens
+"
+
+[node name="item4" type="Panel" parent="ActionBar/actionbarcontainer/darcy/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/darcy/Action/Actions/item4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.5
+offset_top = -12.0
+offset_right = 14.5
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "run
+"
+
+[node name="info" type="Panel" parent="ActionBar/actionbarcontainer/darcy"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3hv1l")
+
+[node name="Name" type="RichTextLabel" parent="ActionBar/actionbarcontainer/darcy/info"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -53.5
+offset_right = 40.5
+offset_bottom = -30.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Calebito"
+
+[node name="hp" type="TextureProgressBar" parent="ActionBar/actionbarcontainer/darcy/info"]
+layout_mode = 0
+offset_left = 85.5
+offset_top = 48.0
+offset_right = 225.5
+offset_bottom = 68.0
+value = 100.0
+texture_under = SubResource("GradientTexture2D_03jck")
+texture_progress = SubResource("GradientTexture2D_1iaw4")
+
+[node name="mana" type="TextureProgressBar" parent="ActionBar/actionbarcontainer/darcy/info"]
+layout_mode = 0
+offset_left = 76.5
+offset_top = 70.0
+offset_right = 206.5
+offset_bottom = 90.0
+value = 100.0
+texture_under = SubResource("GradientTexture2D_2vh6s")
+texture_progress = SubResource("GradientTexture2D_63g0r")
+
+[node name="icon" type="TextureRect" parent="ActionBar/actionbarcontainer/darcy/info"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 110.0
+offset_bottom = 98.0
+texture = ExtResource("4_bmp5r")
+expand_mode = 2
+
+[node name="dotty" type="Panel" parent="ActionBar/actionbarcontainer"]
+custom_minimum_size = Vector2(285, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3cqru")
+script = ExtResource("6_bsjm2")
+
+[node name="Action" type="Panel" parent="ActionBar/actionbarcontainer/dotty"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r0t2g")
+
+[node name="Actions" type="HBoxContainer" parent="ActionBar/actionbarcontainer/dotty/Action"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 72.0
+offset_right = -4.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("7_hmhoo")
+
+[node name="item" type="Panel" parent="ActionBar/actionbarcontainer/dotty/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/dotty/Action/Actions/item"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.5
+offset_top = -12.0
+offset_right = 14.5
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "atk
+"
+
+[node name="item2" type="Panel" parent="ActionBar/actionbarcontainer/dotty/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+script = ExtResource("8_b6f5q")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/dotty/Action/Actions/item2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -11.5
+offset_right = 25.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "magia"
+
+[node name="item3" type="Panel" parent="ActionBar/actionbarcontainer/dotty/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/dotty/Action/Actions/item3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -11.5
+offset_right = 20.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "itens
+"
+
+[node name="item4" type="Panel" parent="ActionBar/actionbarcontainer/dotty/Action/Actions"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwwkv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ActionBar/actionbarcontainer/dotty/Action/Actions/item4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.5
+offset_top = -12.0
+offset_right = 14.5
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "run
+"
+
+[node name="info" type="Panel" parent="ActionBar/actionbarcontainer/dotty"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3hv1l")
+
+[node name="Name" type="RichTextLabel" parent="ActionBar/actionbarcontainer/dotty/info"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -53.5
+offset_right = 40.5
+offset_bottom = -30.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Calebito"
+
+[node name="hp" type="TextureProgressBar" parent="ActionBar/actionbarcontainer/dotty/info"]
+layout_mode = 0
+offset_left = 85.5
+offset_top = 48.0
+offset_right = 225.5
+offset_bottom = 68.0
+value = 100.0
+texture_under = SubResource("GradientTexture2D_03jck")
+texture_progress = SubResource("GradientTexture2D_1iaw4")
+
+[node name="mana" type="TextureProgressBar" parent="ActionBar/actionbarcontainer/dotty/info"]
+layout_mode = 0
+offset_left = 76.5
+offset_top = 70.0
+offset_right = 206.5
+offset_bottom = 90.0
+value = 100.0
+texture_under = SubResource("GradientTexture2D_2vh6s")
+texture_progress = SubResource("GradientTexture2D_63g0r")
+
+[node name="icon" type="TextureRect" parent="ActionBar/actionbarcontainer/dotty/info"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 110.0
+offset_bottom = 98.0
+texture = ExtResource("4_bmp5r")
+expand_mode = 2
+
+[node name="spell" type="Panel" parent="."]
+custom_minimum_size = Vector2(285, 0)
+offset_left = 276.0
+offset_top = 762.0
+offset_right = 561.0
+offset_bottom = 808.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ji6oe")
+script = ExtResource("11_7ml78")
+
+[node name="name" type="RichTextLabel" parent="spell"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 6.0
+offset_right = 135.0
+offset_bottom = 29.0
+theme_override_font_sizes/normal_font_size = 10
+text = "Bola de fogo"
+fit_content = true
+
+[node name="mana" type="RichTextLabel" parent="spell"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 24.0
+offset_right = 132.0
+offset_bottom = 47.0
+text = "Mana: 35"
+fit_content = true
+
+[node name="atk" type="RichTextLabel" parent="spell"]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 3.0
+offset_right = 276.0
+offset_bottom = 26.0
+text = "Ataque base: "
+fit_content = true
+
+[node name="acc" type="RichTextLabel" parent="spell"]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 24.0
+offset_right = 276.0
+offset_bottom = 47.0
+text = "Precisão: "
+fit_content = true

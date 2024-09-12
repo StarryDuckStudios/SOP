@@ -1,36 +1,6 @@
 extends Node
-var txt: Dictionary = {
-	"Item_1" = {
-		"pt" = {
-			"name" :  "Poção de Cura",
-			"descricao" : "Uma poção capaz de regenerar sua vitalidade!"
-		},
-		"en" = {
-			"name" : "Life potion",
-			"descricao" : "A potions able to regen your vitality!"
-		},
-		"propriedades" = {
-			"qtd" : 2,
-			"preco" : 100,
-			"texture" : "res://sprites/itens/Health Potion 1.png"
-		}
-	},
-	"Item_2" = {
-		"pt" = {
-			"name" :  "Poção de Mana",
-			"descricao" : "Uma poção capaz de regenerar sua mana!"
-		},
-		"en" = {
-			"name" : "Mana potion",
-			"descricao" : "A potions able to regen your mana!"
-		},
-		"propriedades" = {
-			"qtd" : 2,
-			"preco" : 100,
-			"texture" : "res://sprites/itens/Antidote 1.png"
-		}
-	}
-}
+var original = InvGlobal.consumiveis
+var txt: Dictionary = copia_dicionario(InvGlobal.consumiveis)
 
 var txtDiag: Dictionary = {
 		"falas_aleatorias" ={
@@ -46,3 +16,14 @@ var txtDiag: Dictionary = {
 		}
 	}
 }
+func copia_dicionario(d: Dictionary) -> Dictionary:
+		var copia = {}
+		for chave in d.keys():
+			var valor = d[chave]
+			if typeof(valor) == TYPE_DICTIONARY:
+				copia[chave] = copia_dicionario(valor) # Recursivamente copiar dicionários
+			elif typeof(valor) == TYPE_ARRAY:
+				copia[chave] = valor.duplicate() # Copiar arrays
+			else:
+				copia[chave] = valor # Copiar outros tipos de valores
+		return copia

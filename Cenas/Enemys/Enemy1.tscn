@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm8kvywk5b6s"]
+
+[ext_resource type="Script" path="res://Enemy.gd" id="1_sy6hd"]
+[ext_resource type="Texture2D" uid="uid://cwkotuj7pomug" path="res://sprites/Caleb/walk_l_3.png" id="2_afl5j"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_sy6hd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_afl5j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -22,7 +22,7 @@ func _ready():
 		for j in tilemap_size.y:
 			var coordinates = Vector2i(i, j)
 			var tile_data = get_cell_tile_data(0, coordinates)
-			if tile_data and tile_data.get_custom_data('name') == "wall":
+			if tile_data and tile_data.get_custom_data('walkable') == false:
 				astar.set_point_solid(coordinates)
 
 func is_point_walkable(local_position):

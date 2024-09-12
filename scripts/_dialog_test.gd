@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Level
+var _name = "dialogo"
 var ativo = false
 var anim_name
 @export var selfAnim: AnimationPlayer
@@ -26,25 +26,11 @@ var traduz_self_pos = {
 func _ready():
 	selfAnim.play("idle_d")
 	ChatsLog.chat_ativo = "npc_teste"; #especifica qual o npc do diálogo para uso em outros scripts;
-func _input(event):
-	if Input.is_action_just_pressed("z") and ativo and _hud.get_child_count() == 0:
-		animator = anim_name.get_parent().get_node("CalebAnimation")
-		animator.play(traduz_pos[anim_name.name]) #Faz o player virar para o npc
-		
-		#Gambiarra pro npc virar pro personagem
-		selfAnim.play(traduz_self_pos[anim_name.name])
+func new_interaction():		
+	if _hud.get_child_count() == 0:
 		var _new_dialog: DialogScreen = _DIALOG_SCREEN.instantiate()
 		if ChatsLog.npc_teste.primeira_vez == true:
 			_new_dialog.data = _dialog_data
 		else:
 			_new_dialog.data = _dialog_data_again
-		await animator.animation_finished
 		_hud.add_child(_new_dialog)
-	
-func Ativo(body):
-	if body.get_parent().name == "Personagem":
-		anim_name = body
-		ativo = true
-func Inativo(body):
-	if body.get_parent().name == "Personagem":
-		ativo = false

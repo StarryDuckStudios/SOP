@@ -10,41 +10,8 @@ var operacao
 var language = ConfigsGlobais.language
 var caminho = "Container/Options/VBoxContainer"
 var caminho_array = ["Container/Options/VBoxContainer"]
-var data: Dictionary = {
-	"Item_1" = {
-		"pt" = {
-			"name" :  "Poção de Cura",
-			"descricao" : "Uma poção capaz de regenerar sua vitalidade!"
-		},
-		"En" = {
-			"name" : "Life potion",
-			"descricao" : "A potions able to regen your vitality!"
-		},
-		"propriedades" = {
-			"qtd" : 2,
-			"preco" : 100,
-			"texture" : "res://sprites/itens/Health Potion 1.png"
-		}
-	},
-	"Item_2" = {
-		"pt" = {
-			"name" :  "Poção de Mana",
-			"descricao" : "Uma poção capaz de regenerar sua mana!"
-		},
-		"En" = {
-			"name" : "Mana potion",
-			"descricao" : "A potions able to regen your mana!"
-		},
-		"propriedades" = {
-			"qtd" : 2,
-			"preco" : 100,
-			"texture" : "res://sprites/itens/Antidote 1.png"
-		}
-	}
-}
-var dialogo_dicionario: Dictionary = {
-
-}
+var data: Dictionary
+var dialogo_dicionario: Dictionary
 
 func _ready():
 	dinheiro.text = str(InvGlobal.dinheiro) + "$"
@@ -103,7 +70,7 @@ func _input(event):
 					loopOn = true
 					dinheiro.text = str(armazena_dinheiro - 1)+ "$"
 					armazena_dinheiro -= 1
-					await get_tree().create_timer(0.01).timeout
+					await get_tree().create_timer(0.001).timeout
 				loopOn = false
 				inv[key]["propriedades"]["quantidade"] += 1
 			print(inv[key]["propriedades"]["quantidade"])
@@ -119,7 +86,7 @@ func _input(event):
 					loopOn = true
 					dinheiro.text = str(armazena_dinheiro + 1)+ "$"
 					armazena_dinheiro += 1
-					await get_tree().create_timer(0.01).timeout
+					await get_tree().create_timer(0.001).timeout
 				loopOn = false
 			print(inv[key]["propriedades"]["quantidade"])
 	if Input.is_action_just_pressed("x"):

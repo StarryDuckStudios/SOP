@@ -4,9 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://cbytr8od7fu7b" path="res://sprites/spritesheetsPersonagens/1 idle.png" id="2_5h126"]
 [ext_resource type="Script" path="res://scripts/Dialogos/dialogoTxt.gd" id="3_in8yx"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vdjs4"]
-size = Vector2(16, 16)
-
 [sub_resource type="Animation" id="Animation_dmtm5"]
 length = 0.001
 tracks/0/type = "value"
@@ -159,6 +156,9 @@ _data = {
 "idle_u": SubResource("Animation_eixok")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqljc"]
+size = Vector2(16, 16)
+
 [node name="npc" type="CharacterBody2D" node_paths=PackedStringArray("selfAnim")]
 y_sort_enabled = true
 script = ExtResource("1_l4kr5")
@@ -170,11 +170,6 @@ texture = ExtResource("2_5h126")
 hframes = 3
 vframes = 2
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_vdjs4")
-
 [node name="Node" type="Node" parent="."]
 script = ExtResource("3_in8yx")
 
@@ -183,5 +178,5 @@ libraries = {
 "": SubResource("AnimationLibrary_5kihh")
 }
 
-[connection signal="area_entered" from="Area2D" to="." method="Ativo"]
-[connection signal="area_exited" from="Area2D" to="." method="Inativo"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wqljc")
